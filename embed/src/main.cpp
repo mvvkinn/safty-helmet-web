@@ -4,6 +4,9 @@
 #include <PubSubClientTools.h>
 #include <ArduinoJson.h>
 
+#include <SoftwareSerial.h>
+#include <TinyGPSPlus.h>
+
 #include <Adafruit_SSD1306.h>
 #include <Adafruit_GFX.h>
 
@@ -14,6 +17,8 @@
 #else
 #define ARDUINO_RUNNING_CORE 1
 #endif
+
+const char *helmet_id = "1";
 
 // Setting Network
 const char *wifi_ssid = "";
@@ -32,6 +37,14 @@ PubSubClientTools mqtt(client); // Easier to use subscribe and callback
 #define DHTTYPE DHT11
 DHT dht(DHTPIN, DHTTYPE);
 float humid, temp;
+
+// GPS Setting
+static const int GPSRX = 16, GPSTX = 17;
+static const uint32_t GPSBaud = 9600;
+TinyGPSPlus gps;
+SoftwareSerial ss(GPSRX, GPSTX);
+float latitude, longitude;
+// float latitude = 37.58510543, longitude = 126.92524348;
 
 // Setting photoresistor lightness detection
 int photoresistor_pin = 34;
@@ -52,8 +65,6 @@ int led_green = 33;
 int led_blue = 25;
 int led_front = 19;
 
-float latitude = 37.58510543, longtitude = 126.92524348;
-
 bool worker_danger = false;
 
 // Setting OLED Display
@@ -63,27 +74,65 @@ Adafruit_SSD1306 display(-1); // -1 = no reset pin
 // FreeRTOS multitask variable
 // SemaphoreHandle_t xMutex;
 
+static void gpsDelay(unsigned long ms)
+{
+  unsigned long start = millis();
+  do
+  {
+    while (ss.available())
+      gps.encode(ss.read());
+  } while (millis() - start < ms);
+}
+
+static float getGPSFloat(float val, bool valid)
+{
+  if (!valid)
+  {
+    return 99.0;
+  }
+  else
+  {
+    return val;
+  }
+  gpsDelay(0);
+}
+
+// show texts OLED display with color,
+void display_showText(String msg, uint16_t color)
+{
+  display.clearDisplay();
+  display.setTextColor(color);
+  display.setCursor(0, 16);
+  display.println(msg);
+  display.display();
+}
+
 // Callback from MQTT Message
-void message_callback(String topic, String message){
+void message_callback(String topic, String message)
+{
   Serial.println("스마트안전모 > " + topic + " : " + message);
 
-  if (topic == "helmet" && message == "Online"){
-    display.clearDisplay();
-    display.setTextColor(WHITE);
-    display.setCursor(0, 16);
-    display.println(message);
-    display.display();
+  if (topic == "helmet" && message == "Online")
+  {
+    display_showText(message, WHITE);
   }
 }
 
 // WiFi, Network connection
-void network_conn(void *parameter){
-  while (1) {
+void network_conn(void *parameter)
+{
+  while (1)
+  {
     // Connect to WiFi when not connected
-    while (!client.connected() || WiFi.status() != WL_CONNECTED) {
+    while (!client.connected() || WiFi.status() != WL_CONNECTED)
+    {
       WiFi.begin(wifi_ssid, wifi_passwd);
       Serial.print("Connecting to WiFi");
-      while(WiFi.status() != WL_CONNECTED) {
+
+      display_showText("Connecting to WiFi..", WHITE);
+
+      while (WiFi.status() != WL_CONNECTED)
+      {
         delay(500);
         Serial.print(".");
       }
@@ -92,42 +141,56 @@ void network_conn(void *parameter){
       // Connect to MQTT when not connected
       client.setServer(mqtt_server, mqtt_port);
       Serial.print("Connecting to MQTT");
-      while(!client.connected()) {
+      while (!client.connected())
+      {
         Serial.print(".");
-        if (client.connect("ESP32Client", mqtt_user, mqtt_passwd)){
+
+        display_showText("Connecting to Server..", WHITE);
+
+        if (client.connect("ESP32Client", mqtt_user, mqtt_passwd))
+        {
           Serial.println("\nConnected to MQTT");
 
+          display_showText("Connected", WHITE);
+
           mqtt.subscribe("helmet", message_callback);
-        } else {
+        }
+        else
+        {
           Serial.print("Error > Failed with state ");
           Serial.println(client.state());
+
+          display_showText(String(client.state()), WHITE);
+
           delay(2000);
         }
       }
       mqtt.publish("helmet", "Online");
     }
-    vTaskDelay(1000/portTICK_PERIOD_MS);
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
   }
 }
 
 // Convert data to JSON and publish
-void dataToJson_publish(void *parameter){
-  while(1){
+void dataToJson_publish(void *parameter)
+{
+  while (1)
+  {
     String json_data;
 
     StaticJsonDocument<256> doc;
 
-    doc["helmet"] = "helmet1";
+    doc["helmet_id"] = helmet_id;
 
     JsonObject sensor = doc.createNestedObject("sensor");
 
-    JsonArray sensor_gps = sensor.createNestedArray("gps"); // "sensor" : {"gps" : [latitude, longtitude]}
-    sensor_gps.add(latitude);
-    sensor_gps.add(longtitude);
+    JsonObject sensor_gps = sensor.createNestedObject("gps"); // "sensor" : {"gps" : [latitude, longitude]}
+    sensor_gps["latitude"] = latitude;
+    sensor_gps["longitude"] = longitude;
 
-    JsonArray sensor_dht = sensor.createNestedArray("dht"); // "sensor":  {"dht" : [humid, temp] }
-    sensor_dht.add(humid);
-    sensor_dht.add(temp);
+    JsonObject sensor_dht = sensor.createNestedObject("dht"); // "sensor":  {"dht" : [humid, temp] }
+    sensor_dht["humid"] = humid;
+    sensor_dht["temp"] = temp;
 
     sensor["photoresitor"] = photo_val;
     sensor["distance"] = distance;
@@ -140,86 +203,134 @@ void dataToJson_publish(void *parameter){
 
     mqtt.publish("helmet", json_data);
 
-    vTaskDelay(1000/portTICK_PERIOD_MS);
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
   }
 }
 
 // Read temp humid from DHT11
-void dhtState(void *parameter){
-  while (1){
+void dhtState(void *parameter)
+{
+  while (1)
+  {
     humid = dht.readHumidity();
     temp = dht.readTemperature();
-    if (isnan(humid) || isnan(temp)){
+    if (isnan(humid) || isnan(temp))
+    {
       humid = 255.0;
       temp = 255.0;
     }
+    vTaskDelay(900 / portTICK_PERIOD_MS);
+  }
+}
 
-    vTaskDelay(900/portTICK_PERIOD_MS);
+// Get latitude, longitude from GPS Sensor
+void gpsState(void *parameter)
+{
+  while (1)
+  {
+    latitude = getGPSFloat(gps.location.lat(), gps.location.isValid());
+    longitude = getGPSFloat(gps.location.lng(), gps.location.isValid());
+
+    while (client.connected())
+    {
+      display.clearDisplay();
+      display.setTextColor(WHITE);
+      display.setCursor(0, 16);
+      display.print("lat : ");
+      display.println(latitude);
+      display.print("lng : ");
+      display.println(longitude);
+      display.display();
+    }
+
+    gpsDelay(1000);
+
+    vTaskDelay(500 / portTICK_PERIOD_MS);
   }
 }
 
 // Read lightness from photoresistor
-void photoresistor(void *parameter){
-  while (1) {
+void photoresistor(void *parameter)
+{
+  while (1)
+  {
     photo_val = analogRead(photoresistor_pin);
 
-    vTaskDelay(600/portTICK_PERIOD_MS);
+    vTaskDelay(600 / portTICK_PERIOD_MS);
   }
 }
 
 // Read shock from SW-240
-void shock(void *parameter){
-  while(1){
+void shock(void *parameter)
+{
+  while (1)
+  {
     int count = 0;
-    if (digitalRead(shock_pin) == HIGH){
+    if (digitalRead(shock_pin) == HIGH)
+    {
       shock_val = true;
-    } else {
+    }
+    else
+    {
       shock_val = false;
     }
 
-    vTaskDelay(800/portTICK_PERIOD_MS);
+    vTaskDelay(800 / portTICK_PERIOD_MS);
   }
 }
 
-// Read distance from HC-SR04 
-void uw_distance(void *parameter){
-  while (1){
-    digitalWrite(uw_trig_pin, LOW);       
+// Read distance from HC-SR04
+void uw_distance(void *parameter)
+{
+  while (1)
+  {
+    digitalWrite(uw_trig_pin, LOW);
     delayMicroseconds(2);
-    digitalWrite(uw_trig_pin, HIGH);   
+    digitalWrite(uw_trig_pin, HIGH);
     delayMicroseconds(10);
     digitalWrite(uw_trig_pin, LOW);
 
     duration = pulseIn(uw_echo_pin, HIGH);
     distance = duration / 29.1 / 2;
 
-    vTaskDelay(100/portTICK_PERIOD_MS);
+    vTaskDelay(100 / portTICK_PERIOD_MS);
   }
 }
 
 // RGB led
-void rgb(bool red, bool green, bool blue){
+void rgb(bool red, bool green, bool blue)
+{
   digitalWrite(led_red, red);
   digitalWrite(led_green, green);
   digitalWrite(led_blue, blue);
 }
 
 // Change bool worker_danger to true when shock detected
-void worker_situation(void *parameter){
-  while(1){
+void worker_situation(void *parameter)
+{
+  while (1)
+  {
     // change to worker_danger = shock && gyro_shock
     // gyro_shock == if there is no changes after shock
-    if (shock_val == true){
+    if (shock_val == true)
+    {
       // this informs admin worker is in danger
       worker_danger = true;
-    } // add distance, and more 
+      rgb(1, 0, 0);
+    }
+    else
+    {
+      worker_danger = false;
+    } // add distance, and more
   }
 }
 
 int i = 0;
 
-void setup(){
+void setup()
+{
   Serial.begin(115200);
+  ss.begin(GPSBaud);
 
   pinMode(led_red, OUTPUT);
   pinMode(led_green, OUTPUT);
@@ -235,27 +346,16 @@ void setup(){
   display.clearDisplay();
   display.display();
 
-  // task function, process name, stack size, parameter of task, priority of task, task handle, core number
-  /*
-  xTaskCreatePinnedToCore(network_conn, "network_conn",4000, NULL, 10, NULL, ARDUINO_RUNNING_CORE);
-  xTaskCreatePinnedToCore(photoresistor, "phtoresistor", 4000, NULL, 10, NULL, ARDUINO_RUNNING_CORE);
-  xTaskCreatePinnedToCore(dhtState, "dhtState", 4000, NULL, 10, NULL, ARDUINO_RUNNING_CORE);
-  */
-
   xTaskCreate(network_conn, "network_conn", 4000, NULL, 10, NULL);
   xTaskCreate(photoresistor, "photoresistor", 4000, NULL, 10, NULL);
   xTaskCreate(dhtState, "dhtState", 4000, NULL, 10, NULL);
   xTaskCreate(shock, "shock", 4000, NULL, 10, NULL);
   xTaskCreate(uw_distance, "uw_distance", 4000, NULL, 10, NULL);
   xTaskCreate(dataToJson_publish, "dataToJson_Publish", 4000, NULL, 10, NULL);
+  xTaskCreate(gpsState, "gpsState", 4000, NULL, 10, NULL);
 }
 
-void loop(){
+void loop()
+{
   client.loop();
-  if (i < 1)
-  {
-    Serial.print("loop is running on core : ");
-    Serial.println(xPortGetCoreID());
-    i++;
-  }
 }
