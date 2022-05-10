@@ -1,2 +1,9 @@
 persistance/config/config.json
 node_modules
+.idea
+
+embed/pio
+embed/vscode/.browse.c_cpp.db*
+embed/vscode/c_cpp_properties.json
+embed/vscode/launch.json
+embed/vscode/ipch
