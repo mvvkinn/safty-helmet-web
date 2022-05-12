@@ -1,99 +1,136 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 	<link href="shcss.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<title>User List</title>
 </head>
+
 <body>
 	<div class="back_btn_section_1">
-		<div class="back_btn_1" onclick="location.href='index.html'"> < BACK </div>
-	</div>
-	<div class="main_title" style="height:350px;">
-		<p class="main_title_text_1">현장 A</p>
-		<p class="main_title_address" style="margin-bottom:60px;">서울특별시 서대문구 가좌로 134</p>
-	</div>
-	<div class="user_list_menu_section">
-		<div class="user_list_menu" style="width:100px;">번호</div>
-		<div class="user_list_menu" style="width:350px;">이름</div>
-		<div class="user_list_menu" style="width:350px;">온도</div>
-		<div class="user_list_menu" style="width:350px;">습도</div>
-		<div class="user_list_menu" style="width:350px;">광량</div>
-		<div class="user_list_menu" style="width:350px;">상태</div>
-	</div>
-	<div class="scroll">
-		<div class="user_list_section" onclick="location.href='userDashboardA.html'">
-			<div class="user_list" style="width:100px; border-left:1px solid #585858">1</div>
-			<div class="user_list" style="width:350px;">홍길동</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">27.3ºC</div>
-			<div class="user_list" style="width:350px; color:#518DDC;">45%</div>
-			<div class="user_list" style="width:350px; color:#FFFF9A;">6032lx</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">양호</div>
+		<div class="back_btn_1" onclick="location.href='index.html'">
+			< BACK </div>
 		</div>
-		<div class="user_list_section">
-			<div class="user_list" style="width:100px; border-left:1px solid #585858">2</div>
-			<div class="user_list" style="width:350px;">김길동</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">27.4ºC</div>
-			<div class="user_list" style="width:350px; color:#518DDC;">47%</div>
-			<div class="user_list" style="width:350px; color:#FFFF9A;">6021lx</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">양호</div>
+		<div class="main_title" style="height:350px;">
+			<p class="main_title_text_1">현장 A</p>
+			<p class="main_title_address" style="margin-bottom:60px;">서울특별시 서대문구 가좌로 134</p>
 		</div>
-		<div class="user_list_section">
-			<div class="user_list" style="width:100px; border-left:1px solid #585858">3</div>
-			<div class="user_list" style="width:350px;">박길동</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">27.5ºC</div>
-			<div class="user_list" style="width:350px; color:#518DDC;">46%</div>
-			<div class="user_list" style="width:350px; color:#FFFF9A;">6022lx</div>
-			<div class="user_list" style="width:350px; color:#ED1C24;">충격감지</div>
+		<div class="user_list_menu_section">
+			<div class="user_list_menu" style="width:100px;">번호</div>
+			<div class="user_list_menu" style="width:350px;">이름</div>
+			<div class="user_list_menu" style="width:350px;">온도</div>
+			<div class="user_list_menu" style="width:350px;">습도</div>
+			<div class="user_list_menu" style="width:350px;">광량</div>
+			<div class="user_list_menu" style="width:350px;">상태</div>
 		</div>
-		<div class="user_list_section">
-			<div class="user_list" style="width:100px; border-left:1px solid #585858">4</div>
-			<div class="user_list" style="width:350px;">이길동</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">27.6ºC</div>
-			<div class="user_list" style="width:350px; color:#518DDC;">44%</div>
-			<div class="user_list" style="width:350px; color:#FFFF9A;">5866lx</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">양호</div>
+		<div class="scroll">
+			<div class="user_list_section" onclick="location.href='userDashboardA.html'">
+				<div class="user_list" style="width:100px; border-left:1px solid #585858">1</div>
+				<div class="user_list" style="width:350px;">홍길동</div>
+				<div class="user_list" id="user_temp" style="width:350px; color:#71FE8D;">27.3ºC</div>
+				<div class="user_list" id="user_humid" style="width:350px; color:#518DDC;">45%</div>
+				<div class="user_list" id="user_photo" style="width:350px; color:#FFFF9A;">6032lx</div>
+				<div class="user_list" id="user_status" style="width:350px; color:#71FE8D;">양호</div>
+			</div>
+			<div class="user_list_section">
+				<div class="user_list" style="width:100px; border-left:1px solid #585858">2</div>
+				<div class="user_list" style="width:350px;">김길동</div>
+				<div class="user_list" style="width:350px; color:#71FE8D;">27.4ºC</div>
+				<div class="user_list" style="width:350px; color:#518DDC;">47%</div>
+				<div class="user_list" style="width:350px; color:#FFFF9A;">6021lx</div>
+				<div class="user_list" style="width:350px; color:#71FE8D;">양호</div>
+			</div>
+			<div class="user_list_section">
+				<div class="user_list" style="width:100px; border-left:1px solid #585858">3</div>
+				<div class="user_list" style="width:350px;">박길동</div>
+				<div class="user_list" style="width:350px; color:#71FE8D;">27.5ºC</div>
+				<div class="user_list" style="width:350px; color:#518DDC;">46%</div>
+				<div class="user_list" style="width:350px; color:#FFFF9A;">6022lx</div>
+				<div class="user_list" style="width:350px; color:#ED1C24;">충격감지</div>
+			</div>
+			<div class="user_list_section">
+				<div class="user_list" style="width:100px; border-left:1px solid #585858">4</div>
+				<div class="user_list" style="width:350px;">이길동</div>
+				<div class="user_list" style="width:350px; color:#71FE8D;">27.6ºC</div>
+				<div class="user_list" style="width:350px; color:#518DDC;">44%</div>
+				<div class="user_list" style="width:350px; color:#FFFF9A;">5866lx</div>
+				<div class="user_list" style="width:350px; color:#71FE8D;">양호</div>
+			</div>
+			<div class="user_list_section">
+				<div class="user_list" style="width:100px; border-left:1px solid #585858">5</div>
+				<div class="user_list" style="width:350px;">홍길동</div>
+				<div class="user_list" style="width:350px; color:#71FE8D;">27.3ºC</div>
+				<div class="user_list" style="width:350px; color:#518DDC;">45%</div>
+				<div class="user_list" style="width:350px; color:#FFFF9A;">6032lx</div>
+				<div class="user_list" style="width:350px; color:#71FE8D;">양호</div>
+			</div>
+			<div class="user_list_section">
+				<div class="user_list" style="width:100px; border-left:1px solid #585858">6</div>
+				<div class="user_list" style="width:350px;">김길동</div>
+				<div class="user_list" style="width:350px; color:#71FE8D;">27.4ºC</div>
+				<div class="user_list" style="width:350px; color:#518DDC;">47%</div>
+				<div class="user_list" style="width:350px; color:#FFFF9A;">6021lx</div>
+				<div class="user_list" style="width:350px; color:#71FE8D;">양호</div>
+			</div>
+			<div class="user_list_section">
+				<div class="user_list" style="width:100px; border-left:1px solid #585858">7</div>
+				<div class="user_list" style="width:350px;">박길동</div>
+				<div class="user_list" style="width:350px; color:#71FE8D;">27.5ºC</div>
+				<div class="user_list" style="width:350px; color:#518DDC;">46%</div>
+				<div class="user_list" style="width:350px; color:#FFFF9A;">6022lx</div>
+				<div class="user_list" style="width:350px; color:#ED1C24;">충격감지</div>
+			</div>
+			<div class="user_list_section">
+				<div class="user_list" style="width:100px; border-left:1px solid #585858">8</div>
+				<div class="user_list" style="width:350px;">이길동</div>
+				<div class="user_list" style="width:350px; color:#71FE8D;">27.6ºC</div>
+				<div class="user_list" style="width:350px; color:#518DDC;">44%</div>
+				<div class="user_list" style="width:350px; color:#FFFF9A;">5866lx</div>
+				<div class="user_list" style="width:350px; color:#71FE8D;">양호</div>
+			</div>
+			<div class="user_list_section">
+				<div class="user_list" style="width:100px; border-left:1px solid #585858">9</div>
+				<div class="user_list" style="width:350px;">김길동</div>
+				<div class="user_list" style="width:350px; color:#71FE8D;">27.4ºC</div>
+				<div class="user_list" style="width:350px; color:#518DDC;">47%</div>
+				<div class="user_list" style="width:350px; color:#FFFF9A;">6021lx</div>
+				<div class="user_list" style="width:350px; color:#71FE8D;">양호</div>
+			</div>
 		</div>
-		<div class="user_list_section">
-			<div class="user_list" style="width:100px; border-left:1px solid #585858">5</div>
-			<div class="user_list" style="width:350px;">홍길동</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">27.3ºC</div>
-			<div class="user_list" style="width:350px; color:#518DDC;">45%</div>
-			<div class="user_list" style="width:350px; color:#FFFF9A;">6032lx</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">양호</div>
-		</div>
-		<div class="user_list_section">
-			<div class="user_list" style="width:100px; border-left:1px solid #585858">6</div>
-			<div class="user_list" style="width:350px;">김길동</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">27.4ºC</div>
-			<div class="user_list" style="width:350px; color:#518DDC;">47%</div>
-			<div class="user_list" style="width:350px; color:#FFFF9A;">6021lx</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">양호</div>
-		</div>
-		<div class="user_list_section">
-			<div class="user_list" style="width:100px; border-left:1px solid #585858">7</div>
-			<div class="user_list" style="width:350px;">박길동</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">27.5ºC</div>
-			<div class="user_list" style="width:350px; color:#518DDC;">46%</div>
-			<div class="user_list" style="width:350px; color:#FFFF9A;">6022lx</div>
-			<div class="user_list" style="width:350px; color:#ED1C24;">충격감지</div>
-		</div>
-		<div class="user_list_section">
-			<div class="user_list" style="width:100px; border-left:1px solid #585858">8</div>
-			<div class="user_list" style="width:350px;">이길동</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">27.6ºC</div>
-			<div class="user_list" style="width:350px; color:#518DDC;">44%</div>
-			<div class="user_list" style="width:350px; color:#FFFF9A;">5866lx</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">양호</div>
-		</div>
-		<div class="user_list_section">
-			<div class="user_list" style="width:100px; border-left:1px solid #585858">9</div>
-			<div class="user_list" style="width:350px;">김길동</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">27.4ºC</div>
-			<div class="user_list" style="width:350px; color:#518DDC;">47%</div>
-			<div class="user_list" style="width:350px; color:#FFFF9A;">6021lx</div>
-			<div class="user_list" style="width:350px; color:#71FE8D;">양호</div>
-		</div>
-	</div>
+		<script>
+			$(document).ready(function () {
+				$.ajax({
+					url: "/getChartData",
+					dataType: "json",
+					type: "GET",
+					success: function (result) {
+						if (result) {
+							$("#user_temp").html(isDHTNotWorking(result.temp));
+							$("#user_humid").html(isDHTNotWorking(result.humid));
+							$("#user_photo").html(result.photoresistor + "lx");
+							$("#user_status").html(userStatus(result));
+						}
+					}
+				})
+			})
+
+			function isDHTNotWorking(data) {
+				if (data == 255) {
+					return "측정불가";
+				}
+				return data;
+			}
+
+			function userStatus(data) {
+				if (data.worker_danger) {
+					return "양호";
+				} else {
+					return "충격감지";
+				}
+			}
+		</script>
 </body>
+
 </html>
