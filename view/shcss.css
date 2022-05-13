@@ -1,4 +1,3 @@
-
 /*
 색상코드
 배경(검정) : #2C2C2C
@@ -8,274 +7,269 @@
 */
 
 body {
-	background-color : #2C2C2C;
-    margin: 0px;
-    padding: 0px;
+  background-color: #2c2c2c;
+  margin: 0px;
+  padding: 0px;
 }
 
 .main_title {
-	display : flex;
-  	align-items : center;
-  	flex-direction : column;
-  	justify-content : center;
-	margin : 0px;
-	height : 400px;
-	box-shadow : 3px 3px 3px black;
-	background-color : #585858;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px;
+  height: 400px;
+  box-shadow: 3px 3px 3px black;
+  background-color: #585858;
 }
 
 .dashboard_title_section {
-	display : flex;
-  	align-items : center;
-  	flex-direction : row;
-  	justify-content : center;
-  	background-color : #585858;
-	box-shadow : 3px 3px 3px black;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #585858;
+  box-shadow: 3px 3px 3px black;
 }
 
 .dashboard_title {
-	width : 80%;
-	display : flex;
-  	align-items : center;
-  	flex-direction : column;
-  	justify-content : center;
-	margin : 0px;
-	height : 150px;
-	color : white;
-	font-size : 40px;
-	font-weight : 700;
-	
+  width: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px;
+  height: 150px;
+  color: white;
+  font-size: 40px;
+  font-weight: 700;
 }
 
 .back_btn_section_1 {
-	height : 50px;
-	background-color : #585858;
-	display : flex;
-  	align-items : center;
-  	flex-direction : row;
+  height: 50px;
+  background-color: #585858;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
 .back_btn_section_2 {
-	width : 10%;
-	height : 150px;
-	background-color : #585858;
+  width: 10%;
+  height: 150px;
+  background-color: #585858;
 }
 
 .back_btn_1 {
-	margin-left : 20px;
-	display : flex;
-  	align-items : center;
-  	justify-content : center;
-	color : white;
-	font-size : 20px;
-	font-weight : 700;
-	font-family : 'Malgun Gothic';
-	cursor : pointer;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Malgun Gothic";
+  cursor: pointer;
 }
 
 .back_btn_2 {
-	margin-top : 12px;
-	margin-left : 20px;
-	color : white;
-	font-size : 20px;
-	font-weight : 700;
-	font-family : 'Malgun Gothic';
-	cursor : pointer;
+  margin-top: 12px;
+  margin-left: 20px;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Malgun Gothic";
+  cursor: pointer;
 }
 
 .report_btn_section {
-	width : 10%;
-	height : 150px;
-	display : flex;
-  	align-items : center;
-  	justify-content : center;
+  width: 10%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .report_btn {
-	width : 100px;
-	height : 120px;
-	background-color : #ED1C24;
-	display : flex;
-  	align-items : center;
-  	justify-content : center;
-	color : white;
-	font-size : 18px;
-	font-weight : 700;
-	font-family : 'Malgun Gothic';
-	box-shadow : 3px 3px 3px #491113;
-	cursor : pointer;
+  width: 100px;
+  height: 120px;
+  background-color: #ed1c24;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: "Malgun Gothic";
+  box-shadow: 3px 3px 3px #491113;
+  cursor: pointer;
 }
 
 .report_btn:active {
-	margin-left : 5px;
-	margin-top : 5px;
-	box-shadow : none;
+  margin-left: 5px;
+  margin-top: 5px;
+  box-shadow: none;
 }
 
 .main_title_text_1 {
-	margin : 0px;
-	font-size : 60px;
-	font-weight : 700;
+  margin: 0px;
+  font-size: 60px;
+  font-weight: 700;
 }
 
 .main_title_text_2 {
-	margin-top : 0px;
-	margin-left : 15px;
-	font-size : 20px;
-	font-weight : 100;
-	letter-spacing : 16.5px;
+  margin-top: 0px;
+  margin-left: 15px;
+  font-size: 20px;
+  font-weight: 100;
+  letter-spacing: 16.5px;
 }
 
 .main_title_address {
-	margin-top : 0px;
-	margin-left : 15px;
-	font-size : 16px;
-	font-weight : 100;
+  margin-top: 0px;
+  margin-left: 15px;
+  font-size: 16px;
+  font-weight: 100;
 }
 
 .btn_section {
-	display : flex;
-  	align-items : center;
-  	flex-direction : row;
-  	justify-content : center;
-	
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .btn_list {
-	width : 1665px;
-	display : flex;
-	flex-flow : wrap;
-	margin-top : 30px;
-	margin-bottom : 30px;
+  width: 1665px;
+  display: flex;
+  flex-flow: wrap;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .btn_normal {
-	width : 350px;
-	height : 70px;
-	line-height : 70px;
-	border : 3px solid white;
-	margin : 30px;
-	text-align : center;
-	color : white;
-	font-size : 16px;
-	font-family : 'Malgun Gothic';
-	cursor : pointer;
+  width: 350px;
+  height: 70px;
+  line-height: 70px;
+  border: 3px solid white;
+  margin: 30px;
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  font-family: "Malgun Gothic";
+  cursor: pointer;
 }
 
 .btn_normal:hover {
-	background-color : white;
-	color : #2C2C2C;
-	border : 3px solid white;
+  background-color: white;
+  color: #2c2c2c;
+  border: 3px solid white;
 }
 
 .user_list_menu_section {
-	padding-left : 67px;
-	padding-right : 67px;
-	height : 60px;
-	display : flex;
-  	align-items : center;
-  	flex-direction : row;
-  	justify-content : center;
-	border-bottom : 1px solid #585858;
+  padding-left: 67px;
+  padding-right: 67px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  border-bottom: 1px solid #585858;
 }
 
 .user_list_menu {
-	color : white;
-	text-align : center;
-	font-size : 16px;
-	font-family : 'Malgun Gothic';
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  font-family: "Malgun Gothic";
 }
 
 .user_list_section {
-	padding-left : 67px;
-	padding-right : 60px;
-	height : 60px;
-	display : flex;
-  	align-items : center;
-  	flex-direction : row;
-  	justify-content : center;
-	cursor : pointer;
+  padding-left: 67px;
+  padding-right: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .user_list {
-	color : white;
-	text-align : center;
-	font-size : 16px;
-	font-family : 'Malgun Gothic';
-	border-right : 1px solid #585858;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  font-family: "Malgun Gothic";
+  border-right: 1px solid #585858;
 }
 
 .user_list_section:hover {
-	background-color : #1F1F1F;
+  background-color: #1f1f1f;
 }
 
 .scroll {
-	height : 450px;
-	overflow : auto;
-	overflow-x : hidden;
+  height: 450px;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 .scroll::-webkit-scrollbar {
-    width: 7px;
+  width: 7px;
 }
 
 .scroll::-webkit-scrollbar-thumb {
-    background-color: #585858;
-    border-radius: 10px;
+  background-color: #585858;
+  border-radius: 10px;
 }
 
 .info_list_section {
-	padding : 15px;
-	display : flex;
-	flex-flow : wrap;
-  	align-items : center;
-  	flex-direction : row;
-  	justify-content : center;
+  padding: 15px;
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .info_section {
-	cursor : pointer;
-	margin : 15px;
+  cursor: pointer;
+  margin: 15px;
 }
 
 .info_section:hover {
-	background-color : #1F1F1F;
+  background-color: #1f1f1f;
 }
 
 .info_title {
-	background-color : #585858;
-	width : 350px;
-	padding : 10px;
-	color : white;
-	font-size : 16px;
-	font-family : 'Malgun Gothic';
+  background-color: #585858;
+  width: 350px;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
+  font-family: "Malgun Gothic";
 }
 
 .info_value {
-	height : 200px;
-	display : flex;
-  	align-items : center;
-  	flex-direction : row;
-  	justify-content : center;
-	font-weight : 700;
-	font-size : 50px;
-	font-family : 'Malgun Gothic';
-	border : 3px solid #585858;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 50px;
+  font-family: "Malgun Gothic";
+  border: 3px solid #585858;
 }
 
 #graph_section {
-	height : 350px;
-	padding-top : 30px;
-	padding-botton : 30px;
-	padding-right : 60px;
-	padding-left : 60px;
+  height: 350px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-right: 60px;
+  padding-left: 60px;
 }
 
 p {
-	color : #ffffff;
-	font-size : 16px;
-	font-family : 'Malgun Gothic';
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Malgun Gothic";
 }
-
-
-

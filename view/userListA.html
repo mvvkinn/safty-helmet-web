@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<link href="shcss.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
 	<title>User List</title>
 </head>
 
@@ -100,6 +101,15 @@
 			</div>
 		</div>
 		<script>
+			var socket = io.connect("http://localhost:3000");
+
+			socket.on('msg', function (result) {
+				$("#user_temp").html(isDHTNotWorking(result.temp));
+				$("#user_humid").html(isDHTNotWorking(result.humid));
+				$("#user_photo").html(result.photoresistor + "lx");
+				$("#user_status").html(userStatus(result));
+			})
+
 			$(document).ready(function () {
 				$.ajax({
 					url: "/getChartData",
@@ -120,15 +130,19 @@
 				if (data == 255) {
 					return "측정불가";
 				}
-				return data;
+				return parseFloat(data).toFixed(2);
 			}
 
 			function userStatus(data) {
-				if (data.worker_danger) {
-					return "양호";
-				} else {
+				if (data.shock) {
 					return "충격감지";
 				}
+
+				if (data.temp > 35 && data.temp != 255) {
+					return "현장온도 높음";
+				}
+
+				return "양호";
 			}
 		</script>
 </body>
