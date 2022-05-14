@@ -104,10 +104,7 @@
 			var socket = io.connect("http://localhost:3000");
 
 			socket.on('msg', function (result) {
-				$("#user_temp").html(isDHTNotWorking(result.temp));
-				$("#user_humid").html(isDHTNotWorking(result.humid));
-				$("#user_photo").html(result.photoresistor + "lx");
-				$("#user_status").html(userStatus(result));
+				setListValues(result.temp, result.humid, result.photoresistor, userStatus(result));
 			})
 
 			$(document).ready(function () {
@@ -117,22 +114,19 @@
 					type: "GET",
 					success: function (result) {
 						if (result) {
-							$("#user_temp").html(isDHTNotWorking(result.temp));
-							$("#user_humid").html(isDHTNotWorking(result.humid));
-							$("#user_photo").html(result.photoresistor + "lx");
-							$("#user_status").html(userStatus(result));
+							setListValues(result.temp, result.humid, result.photoresistor, userStatus(result));
 						}
 					}
 				})
 			})
 
-			function isDHTNotWorking(data) {
-				if (data == 255) {
-					return "측정불가";
-				}
-				return parseFloat(data).toFixed(2);
+			function setListValues(temp, humid, lightness, userstatus) {
+				$("#user_temp").html(parseFloat(temp).toFixed(2) + "ºC");
+				$("#user_humid").html(parseFloat(humid).toFixed(2) + "%");
+				$("#user_photo").html(lightness + "lx");
+				$("#user_status").html(userstatus);
+				$("#user_status").css("color:#ED1C24");
 			}
-
 			function userStatus(data) {
 				if (data.shock) {
 					return "충격감지";
