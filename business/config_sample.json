@@ -1,0 +1,13 @@
+{
+  "mqtt": {
+    "host": "",
+    "port": 1883,
+    "username": "",
+    "password": ""
+  },
+  "mysql-client": {
+    "host": "",
+    "user": "",
+    "password": ""
+  }
+}
