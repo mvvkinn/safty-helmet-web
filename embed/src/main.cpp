@@ -33,7 +33,7 @@ PubSubClient client(ESPClient);
 PubSubClientTools mqtt(client); // Easier to use subscribe and callback
 
 // Setting DHT11 temperature humidity
-#define DHTPIN 23
+#define DHTPIN 15
 #define DHTTYPE DHT11
 DHT dht(DHTPIN, DHTTYPE);
 float humid, temp;
@@ -212,14 +212,17 @@ void dhtState(void *parameter)
 {
   while (1)
   {
-    humid = dht.readHumidity();
-    temp = dht.readTemperature();
-    if (isnan(humid) || isnan(temp))
+    float t_humid = dht.readHumidity();
+    delay(500);
+    float t_temp = dht.readTemperature();
+
+    if (!isnan(t_humid) || !isnan(t_temp))
     {
-      humid = 255.0;
-      temp = 255.0;
+      humid = t_humid;
+      temp = t_temp;
     }
-    vTaskDelay(900 / portTICK_PERIOD_MS);
+
+    vTaskDelay(2000 / portTICK_PERIOD_MS);
   }
 }
 
@@ -331,6 +334,8 @@ void setup()
 {
   Serial.begin(115200);
   ss.begin(GPSBaud);
+
+  dht.begin();
 
   pinMode(led_red, OUTPUT);
   pinMode(led_green, OUTPUT);
