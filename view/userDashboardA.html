@@ -135,6 +135,7 @@
 
 				var socket = io.connect("http://localhost:3000");
 
+
 				socket.on('msg', function (result) {
 					setListValues(result.temp, result.humid, result.photoresistor, result.shock);
 
@@ -142,6 +143,7 @@
 					insertDataOnChart(options_temp, parseFloat(result.temp).toFixed(2));
 					insertDataOnChart(options_light, result.photoresistor);
 					graph.update();
+
 
 				})
 
@@ -186,9 +188,6 @@
 				}
 			</script>
 		</div>
-		<script>
-
-		</script>
 </body>
 
 </html>
