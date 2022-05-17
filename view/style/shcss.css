@@ -1,13 +1,7 @@
-/*
-색상코드
-배경(검정) : #2C2C2C
-유저리스트 마우스 오버 검정  : #1F1F1F
-회색 : #585858
-빨강 : #ED1C24
-*/
+@charset "UTF-8";
 
 body {
-  background-color: #2c2c2c;
+  background-color: #F4F4F4;
   margin: 0px;
   padding: 0px;
 }
@@ -19,8 +13,9 @@ body {
   justify-content: center;
   margin: 0px;
   height: 400px;
-  box-shadow: 3px 3px 3px black;
-  background-color: #585858;
+  background-color: white;
+  box-shadow: 3px 3px 3px #DFDFDF;
+  ;
 }
 
 .dashboard_title_section {
@@ -28,8 +23,9 @@ body {
   align-items: center;
   flex-direction: row;
   justify-content: center;
-  background-color: #585858;
-  box-shadow: 3px 3px 3px black;
+  background-color: white;
+  box-shadow: 3px 3px 3px #DFDFDF;
+  ;
 }
 
 .dashboard_title {
@@ -40,14 +36,14 @@ body {
   justify-content: center;
   margin: 0px;
   height: 150px;
-  color: white;
+  color: #081547;
   font-size: 40px;
   font-weight: 700;
 }
 
 .back_btn_section_1 {
   height: 50px;
-  background-color: #585858;
+  background-color: white;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -56,7 +52,7 @@ body {
 .back_btn_section_2 {
   width: 10%;
   height: 150px;
-  background-color: #585858;
+  background-color: white;
 }
 
 .back_btn_1 {
@@ -64,20 +60,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #081547;
   font-size: 20px;
   font-weight: 700;
-  font-family: "Malgun Gothic";
+  font-family: 'Malgun Gothic';
   cursor: pointer;
 }
 
 .back_btn_2 {
   margin-top: 12px;
   margin-left: 20px;
-  color: white;
+  color: #081547;
   font-size: 20px;
   font-weight: 700;
-  font-family: "Malgun Gothic";
+  font-family: 'Malgun Gothic';
   cursor: pointer;
 }
 
@@ -92,14 +88,14 @@ body {
 .report_btn {
   width: 100px;
   height: 120px;
-  background-color: #ed1c24;
+  background-color: #ED1C24;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-size: 18px;
   font-weight: 700;
-  font-family: "Malgun Gothic";
+  font-family: 'Malgun Gothic';
   box-shadow: 3px 3px 3px #491113;
   cursor: pointer;
 }
@@ -111,12 +107,14 @@ body {
 }
 
 .main_title_text_1 {
+  color: #081547;
   margin: 0px;
   font-size: 60px;
   font-weight: 700;
 }
 
 .main_title_text_2 {
+  color: #081547;
   margin-top: 0px;
   margin-left: 15px;
   font-size: 20px;
@@ -136,6 +134,7 @@ body {
   align-items: center;
   flex-direction: row;
   justify-content: center;
+
 }
 
 .btn_list {
@@ -149,20 +148,20 @@ body {
 .btn_normal {
   width: 350px;
   height: 70px;
+  background-color: white;
   line-height: 70px;
-  border: 3px solid white;
   margin: 30px;
   text-align: center;
-  color: white;
+  color: #081547;
   font-size: 16px;
-  font-family: "Malgun Gothic";
+  font-family: 'Malgun Gothic';
   cursor: pointer;
+  box-shadow: 3px 3px 3px #DFDFDF;
 }
 
 .btn_normal:hover {
-  background-color: white;
-  color: #2c2c2c;
-  border: 3px solid white;
+  background-color: #081547;
+  color: white;
 }
 
 .user_list_menu_section {
@@ -177,10 +176,10 @@ body {
 }
 
 .user_list_menu {
-  color: white;
+  color: #081547;
   text-align: center;
   font-size: 16px;
-  font-family: "Malgun Gothic";
+  font-family: 'Malgun Gothic';
 }
 
 .user_list_section {
@@ -195,15 +194,19 @@ body {
 }
 
 .user_list {
-  color: white;
+  color: 081547;
   text-align: center;
   font-size: 16px;
-  font-family: "Malgun Gothic";
-  border-right: 1px solid #585858;
+  font-family: 'Malgun Gothic';
 }
 
 .user_list_section:hover {
-  background-color: #1f1f1f;
+  background-color: #081547;
+}
+
+.user_list_section:hover>.user_list {
+  color: white;
+  border: none;
 }
 
 .scroll {
@@ -221,7 +224,7 @@ body {
   border-radius: 10px;
 }
 
-.info_list_section {
+#info_list_section {
   padding: 15px;
   display: flex;
   flex-flow: wrap;
@@ -230,25 +233,29 @@ body {
   justify-content: center;
 }
 
-.info_section {
+#info_section {
   cursor: pointer;
   margin: 15px;
+  box-sizing: border-box;
+  box-shadow: 3px 3px 3px #DFDFDF;
 }
 
-.info_section:hover {
-  background-color: #1f1f1f;
+#info_section:hover>#info_value {
+  background-color: #ededed;
+  color: #081547;
 }
 
-.info_title {
-  background-color: #585858;
+#info_title {
+  background-color: #081547;
   width: 350px;
   padding: 10px;
   color: white;
   font-size: 16px;
-  font-family: "Malgun Gothic";
+  font-family: 'Malgun Gothic';
 }
 
-.info_value {
+#info_value {
+  background-color: white;
   height: 200px;
   display: flex;
   align-items: center;
@@ -256,20 +263,40 @@ body {
   justify-content: center;
   font-weight: 700;
   font-size: 50px;
-  font-family: "Malgun Gothic";
-  border: 3px solid #585858;
+  font-family: 'Malgun Gothic';
+  color: 041940;
+}
+
+#lower_section {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  padding-left: 70px;
 }
 
 #graph_section {
-  height: 350px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-right: 60px;
-  padding-left: 60px;
+  background-color: white;
+  float: left;
+  width: 1120px;
+  height: 370px;
+  padding-top : 30px;
+  padidng-left: 20px;
+  padding-right: 20px;
+  box-shadow: 3px 3px 3px #DFDFDF;
+}
+
+#gps {
+  background-color: white;
+  float: left;
+  width: 400px;
+  height: 400px;
+  box-shadow: 3px 3px 3px #DFDFDF;
+  margin-left: 30px;
 }
 
 p {
-  color: #ffffff;
+  color: #081547;
   font-size: 16px;
-  font-family: "Malgun Gothic";
+  font-family: 'Malgun Gothic';
 }
