@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body {
-  background-color: #F4F4F4;
+  background-color: #f4f4f4;
   margin: 0px;
   padding: 0px;
 }
@@ -14,8 +14,7 @@ body {
   margin: 0px;
   height: 400px;
   background-color: white;
-  box-shadow: 3px 3px 3px #DFDFDF;
-  ;
+  box-shadow: 3px 3px 3px #dfdfdf;
 }
 
 .dashboard_title_section {
@@ -24,8 +23,7 @@ body {
   flex-direction: row;
   justify-content: center;
   background-color: white;
-  box-shadow: 3px 3px 3px #DFDFDF;
-  ;
+  box-shadow: 3px 3px 3px #dfdfdf;
 }
 
 .dashboard_title {
@@ -63,7 +61,7 @@ body {
   color: #081547;
   font-size: 20px;
   font-weight: 700;
-  font-family: 'Malgun Gothic';
+  font-family: "Malgun Gothic";
   cursor: pointer;
 }
 
@@ -73,7 +71,7 @@ body {
   color: #081547;
   font-size: 20px;
   font-weight: 700;
-  font-family: 'Malgun Gothic';
+  font-family: "Malgun Gothic";
   cursor: pointer;
 }
 
@@ -88,14 +86,14 @@ body {
 .report_btn {
   width: 100px;
   height: 120px;
-  background-color: #ED1C24;
+  background-color: #ed1c24;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-size: 18px;
   font-weight: 700;
-  font-family: 'Malgun Gothic';
+  font-family: "Malgun Gothic";
   box-shadow: 3px 3px 3px #491113;
   cursor: pointer;
 }
@@ -134,7 +132,6 @@ body {
   align-items: center;
   flex-direction: row;
   justify-content: center;
-
 }
 
 .btn_list {
@@ -154,9 +151,9 @@ body {
   text-align: center;
   color: #081547;
   font-size: 16px;
-  font-family: 'Malgun Gothic';
+  font-family: "Malgun Gothic";
   cursor: pointer;
-  box-shadow: 3px 3px 3px #DFDFDF;
+  box-shadow: 3px 3px 3px #dfdfdf;
 }
 
 .btn_normal:hover {
@@ -179,7 +176,7 @@ body {
   color: #081547;
   text-align: center;
   font-size: 16px;
-  font-family: 'Malgun Gothic';
+  font-family: "Malgun Gothic";
 }
 
 .user_list_section {
@@ -197,14 +194,14 @@ body {
   color: 081547;
   text-align: center;
   font-size: 16px;
-  font-family: 'Malgun Gothic';
+  font-family: "Malgun Gothic";
 }
 
 .user_list_section:hover {
   background-color: #081547;
 }
 
-.user_list_section:hover>.user_list {
+.user_list_section:hover > .user_list {
   color: white;
   border: none;
 }
@@ -237,10 +234,10 @@ body {
   cursor: pointer;
   margin: 15px;
   box-sizing: border-box;
-  box-shadow: 3px 3px 3px #DFDFDF;
+  box-shadow: 3px 3px 3px #dfdfdf;
 }
 
-#info_section:hover>#info_value {
+#info_section:hover > #info_value {
   background-color: #ededed;
   color: #081547;
 }
@@ -251,7 +248,7 @@ body {
   padding: 10px;
   color: white;
   font-size: 16px;
-  font-family: 'Malgun Gothic';
+  font-family: "Malgun Gothic";
 }
 
 #info_value {
@@ -263,7 +260,7 @@ body {
   justify-content: center;
   font-weight: 700;
   font-size: 50px;
-  font-family: 'Malgun Gothic';
+  font-family: "Malgun Gothic";
   color: 041940;
 }
 
@@ -280,10 +277,10 @@ body {
   float: left;
   width: 1120px;
   height: 370px;
-  padding-top : 30px;
-  padidng-left: 20px;
+  padding-top: 30px;
+  padding-left: 20px;
   padding-right: 20px;
-  box-shadow: 3px 3px 3px #DFDFDF;
+  box-shadow: 3px 3px 3px #dfdfdf;
 }
 
 #gps {
@@ -291,12 +288,12 @@ body {
   float: left;
   width: 400px;
   height: 400px;
-  box-shadow: 3px 3px 3px #DFDFDF;
+  box-shadow: 3px 3px 3px #dfdfdf;
   margin-left: 30px;
 }
 
 p {
   color: #081547;
   font-size: 16px;
-  font-family: 'Malgun Gothic';
+  font-family: "Malgun Gothic";
 }
