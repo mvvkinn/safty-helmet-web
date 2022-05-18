@@ -237,7 +237,7 @@ body {
   box-shadow: 3px 3px 3px #dfdfdf;
 }
 
-#info_section:hover > #info_value {
+#info_section:hover > .info_value {
   background-color: #ededed;
   color: #081547;
 }
@@ -251,7 +251,7 @@ body {
   font-family: "Malgun Gothic";
 }
 
-#info_value {
+.info_value {
   background-color: white;
   height: 200px;
   display: flex;
