@@ -1,5 +1,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <!DOCTYPE html>
 <html>
 
@@ -102,15 +102,17 @@
 			</div>
 		</div>
 		<script>
-			var socket = io.connect("http://localhost:3000");
+			var socket = io();
 
 			socket.on('msg', function (result) {
-				setListValues(result.temp, result.humid, result.photoresistor, result.shock);
+				const sensor = result.sensor;
+				console.log(sensor);
+				setListValues(sensor.dht.temp, sensor.dht.humid, sensor.photoresitor, sensor.shock);
 			})
 
 			$(document).ready(function () {
 				$.ajax({
-					url: "/getChartData",
+					url: "/getHelmetData",
 					dataType: "json",
 					type: "GET",
 					success: function (result) {
@@ -140,7 +142,13 @@
 
 				else if (temp < 30 && !shock) {
 					$("#user_status").html("양호");
-					$("#user_status").css('color', '#71FE8D');
+
+					// change color when on hover
+					$("#user_status").hover(function () {
+						$(this).css('color', 'white');
+					}, function () {
+						$(this).css('color', '#081547');
+					});
 				}
 			}
 		</script>

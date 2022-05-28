@@ -2,7 +2,6 @@ var mqtt = require("mqtt");
 const helmet = require("../persistance/helmet");
 const mqtt_config = require("./config.json").mqtt;
 const io = require("socket.io-client");
-const { Socket } = require("socket.io");
 
 // json type check function
 function IsJsonString(str) {

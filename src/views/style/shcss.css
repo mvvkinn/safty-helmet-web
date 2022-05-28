@@ -292,6 +292,67 @@ body {
   margin-left: 30px;
 }
 
+#report_popup, #report_success {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.5);
+  text-align:center;
+}
+
+#report_popup:after, #report_success:after {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  content: '';
+}
+
+.report_inner, .report_success_inner {
+  display: inline-block;
+  background-color: #f4f4f4;
+  vertical-align: middle;
+  width: 500px;
+}
+
+.report_font_section {
+  padding: 50px 0 0 0;
+  height: 115px;
+}
+
+.report_font_1 {
+  margin: 0 0 5px 0;
+  font-size: 30px;
+  color: red;
+  font-weight: 700;
+}
+
+.report_font_2 {
+  font-size: 16px;
+  color: black;
+  font-weight: 300;
+}
+
+.report_popup_btn_section {
+  display: flex;
+}
+
+.report_popup_btn {
+  width: 50%;
+  height: 40px;
+  padding: 20px 0 0 0;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  border-top: 1.5px solid #dfdfdf;
+}
+
+.report_popup_btn:hover {
+  background-color: #081547;
+  color: white;
+}
+
 p {
   color: #081547;
   font-size: 16px;

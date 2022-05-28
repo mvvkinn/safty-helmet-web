@@ -1,6 +1,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cd279f7aad64d95a68830694bdd2c95f"></script>
 <!DOCTYPE html>
 <html>
@@ -19,7 +19,7 @@
 			</div>
 			<div class="dashboard_title">홍길동</div>
 			<div class="report_btn_section">
-				<div class="report_btn">긴급 신고</div>
+				<div class="report_btn" onclick="doReport()">긴급 신고</div>
 			</div>
 		</div>
 		<div id="info_list_section">
@@ -37,7 +37,7 @@
 			</div>
 			<div style="margin:15px; box-shadow: 3px 3px 3px #DFDFDF;">
 				<div id="info_title">사용자 상태</div>
-				<div class="info_value" id="user_status">OFF</div>
+				<div class="info_value" id="user_status">양호</div>
 			</div>
 		</div>
 		<div id="lower_section">
@@ -46,7 +46,51 @@
 			</div>
 			<div id="gps" height="75px"></div>
 		</div>
+		
+		<div id="report_popup" style="display:none;">
+			<div class="report_inner">
+				<div class="report_font_section">
+					<div class="report_font_1">신고하시겠습니까?</div>
+					<div class="report_font_2">확인 버튼을 누를 시 구급차가 빠르게 현장으로 출동합니다.</div>
+				</div>
+				<div class="report_popup_btn_section">
+					<div class="report_popup_btn" onclick="successReport()">확인</div>
+					<div class="report_popup_btn" onclick="closeReport()" style="border-left:1.5px solid #dfdfdf;">취소</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="report_success" style="display:none;">
+			<div class="report_success_inner">
+				<div class="report_font_section">
+					<div class="report_font_1">신고 완료되었습니다.</div>
+					<div class="report_font_2">가까운 구급대에 자동으로 신고가 완료되었습니다.</div>
+				</div>
+				<div class="report_popup_btn_section">
+					<div class="report_popup_btn" onclick="closeReport()" style="width:100%;">닫기</div>
+				</div>
+			</div>
+		</div>
+
 		<script>
+
+			//신고버튼 팝업
+			var report_target = document.getElementById('report_popup');
+			var report_success = document.getElementById('report_success');
+
+			function doReport() {
+        	    report_target.style.display = 'block';
+			}
+			function closeReport() {
+    	       report_target.style.display = 'none';
+    	       report_success.style.display = 'none';
+    	    }
+    	    function successReport() {
+    	    	report_success.style.display = 'block';
+				report_target.style.display = 'none';
+    	    }
+
+			//그래프 출력
 			var options_temp = {
 				type: 'line',
 				data: {
@@ -132,27 +176,27 @@
 				changeData(graph, options_light);
 			}
 
-			var socket = io.connect("http://localhost:3000");
-
+			var socket = io();
 
 			socket.on('msg', function (result) {
-				setListValues(result.temp, result.humid, result.photoresistor, result.shock);
+				const sensor = result.sensor;
+				setListValues(sensor.dht.temp, sensor.dht.humid, sensor.photoresitor, sensor.shock);
 
-				insertDataOnChart(options_hum, parseFloat(result.humid).toFixed(2));
-				insertDataOnChart(options_temp, parseFloat(result.temp).toFixed(2));
-				insertDataOnChart(options_light, result.photoresistor);
+				insertDataOnChart(options_hum, parseFloat(sensor.dht.humid).toFixed(2));
+				insertDataOnChart(options_temp, parseFloat(sensor.dht.temp).toFixed(2));
+				insertDataOnChart(options_light, sensor.photoresitor);
 				graph.update();
 			})
 
 			$(document).ready(function () {
 				$.ajax({
-					url: "/getChartData",
+					url: "/getHelmetData",
 					dataType: "json",
 					type: "GET",
 
 					success: function (result) {
 						if (result) {
-							setListValues(result.temp, result.humid, result.photoresistor, result.shock);
+							setListValues(result);
 							insertDataOnChart(options_hum, parseFloat(result.humid).toFixed(1));
 							insertDataOnChart(options_temp, parseFloat(result.temp).toFixed(1));
 							insertDataOnChart(options_light, result.photoresistor);
@@ -166,7 +210,7 @@
 				$("#user_temp").html(parseFloat(temp).toFixed(1) + "ºC");
 				$("#user_humid").html(parseFloat(humid).toFixed(1) + "%");
 				$("#user_lightness").html(lightness + "lx");
-				userStatus(temp, shock);
+				userStatus(temp, shock)
 			}
 
 			function userStatus(temp, shock) {
@@ -182,10 +226,11 @@
 
 				else if (temp < 30 && !shock) {
 					$("#user_status").html("양호");
-					$("#user_status").css('color', '#71FE8D');
+					$("#user_status").css('color', '#081547');
 				}
 			}
 
+			//GPS
 			var container = document.getElementById('gps');
 			var options = {
 				center: new kakao.maps.LatLng(33.450701, 126.570667),
@@ -194,22 +239,29 @@
 
 			var map = new kakao.maps.Map(container, options);
 
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(function (position) {
-					var lat = position.coords.latitude, // latitude 위도
-						lon = position.coords.longitude; // longitude 경도
+			function setGeolocationByGPS(latitude, longitude) {
+				if (latitude != 99 || longitude != 99) {
+					var locPosition = new kakao.maps.LatLng(latitude, longitude);
+					return;
+				}
 
-					var locPosition = new kakao.maps.LatLng(lat, lon),
-						message = '<div style="padding:5px;">사용자 위치</div>';
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function (position) {
+						var lat = position.coords.latitude, // latitude 위도
+							lon = position.coords.longitude; // longitude 경도
+
+						var locPosition = new kakao.maps.LatLng(lat, lon),
+							message = '<div style="padding:5px;">사용자 위치</div>';
+
+						displayMarker(locPosition, message);
+					});
+
+				} else {
+					var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+						message = 'can\'t use Geolocation'
 
 					displayMarker(locPosition, message);
-				});
-
-			} else {
-				var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
-					message = 'can\'t use Geolocation'
-
-				displayMarker(locPosition, message);
+				}
 			}
 
 			function displayMarker(locPosition, message) {
