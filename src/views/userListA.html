@@ -1,5 +1,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <!DOCTYPE html>
 <html>
 
@@ -101,16 +101,10 @@
 				<div class="user_list" style="width:350px;">양호</div>
 			</div>
 		</div>
-		<script>
-			var socket = io.connect("http://localhost:3000");
-
-			socket.on('msg', function (result) {
-				setListValues(result.temp, result.humid, result.photoresistor, result.shock);
-			})
-
+		<script src="/public/js/userListA.js">
 			$(document).ready(function () {
 				$.ajax({
-					url: "/getChartData",
+					url: "/getHelmetData",
 					dataType: "json",
 					type: "GET",
 					success: function (result) {
@@ -121,12 +115,6 @@
 				})
 			})
 
-			function setListValues(temp, humid, lightness, shock) {
-				$("#user_temp").html(parseFloat(temp).toFixed(1) + "ºC");
-				$("#user_humid").html(parseFloat(humid).toFixed(1) + "%");
-				$("#user_lightness").html(lightness + "lx");
-				userStatus(temp, shock)
-			}
 			function userStatus(temp, shock) {
 				if (shock) {
 					$("#user_status").html("충격감지");
@@ -140,7 +128,13 @@
 
 				else if (temp < 30 && !shock) {
 					$("#user_status").html("양호");
-					$("#user_status").css('color', '#71FE8D');
+
+					// change color when on hover
+					$("#user_status").hover(function () {
+						$(this).css('color', 'white');
+					}, function () {
+						$(this).css('color', '#081547');
+					});
 				}
 			}
 		</script>

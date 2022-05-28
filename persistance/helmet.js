@@ -1,4 +1,33 @@
 const models = require("./models");
+const mysql = require("mysql");
+const config = require("../business/config.json").mysql;
+
+let mysql_client = mysql.createConnection({
+  host: config.host,
+  user: config.user,
+  password: config.password,
+  database: "safty_helmet",
+});
+
+mysql_client.connect();
+
+let dbReturns = selectFromHelmetID();
+
+console.log(dbReturns);
+
+function selectFromHelmetID() {
+  let sql = "SELECT * FROM `helmet` WHERE `helmet`.`helmet_id` = 1";
+  let result;
+
+  return new Promise(resolve => {
+    mysql_client.query(sql, (error, rows, fields) => {
+      if (error) throw error;
+      console.log(rows);
+
+      
+    });
+  });
+}
 
 let uploadData = function (data) {
   let data_placed = { helmet_id: data.helmet_id };

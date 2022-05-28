@@ -1,6 +1,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cd279f7aad64d95a68830694bdd2c95f"></script>
 <!DOCTYPE html>
 <html>
@@ -37,7 +37,7 @@
 			</div>
 			<div style="margin:15px; box-shadow: 3px 3px 3px #DFDFDF;">
 				<div id="info_title">사용자 상태</div>
-				<div class="info_value" id="user_status">OFF</div>
+				<div class="info_value" id="user_status">양호</div>
 			</div>
 		</div>
 		<div id="lower_section">
@@ -131,44 +131,21 @@
 				removeData(graph);
 				changeData(graph, options_light);
 			}
-
-			var socket = io.connect("http://localhost:3000");
-
-
-			socket.on('msg', function (result) {
-				setListValues(result.temp, result.humid, result.photoresistor, result.shock);
-
-				insertDataOnChart(options_hum, parseFloat(result.humid).toFixed(2));
-				insertDataOnChart(options_temp, parseFloat(result.temp).toFixed(2));
-				insertDataOnChart(options_light, result.photoresistor);
+			function socketCallback(data) {
+				viewTemp();
+				console.log(data);
+				insertDataOnChart(options_hum, parseFloat(data.dht.humid).toFixed(2));
+				insertDataOnChart(options_temp, parseFloat(data.dht.temp).toFixed(2));
+				insertDataOnChart(options_light, data.photoresitor);
 				graph.update();
-			})
-
-			$(document).ready(function () {
-				$.ajax({
-					url: "/getChartData",
-					dataType: "json",
-					type: "GET",
-
-					success: function (result) {
-						if (result) {
-							setListValues(result.temp, result.humid, result.photoresistor, result.shock);
-							insertDataOnChart(options_hum, parseFloat(result.humid).toFixed(1));
-							insertDataOnChart(options_temp, parseFloat(result.temp).toFixed(1));
-							insertDataOnChart(options_light, result.photoresistor);
-							viewTemp();
-						}
-					}
-				})
-			})
-
-			function setListValues(temp, humid, lightness, shock) {
-				$("#user_temp").html(parseFloat(temp).toFixed(1) + "ºC");
-				$("#user_humid").html(parseFloat(humid).toFixed(1) + "%");
-				$("#user_lightness").html(lightness + "lx");
-				userStatus(temp, shock);
+				setGeolocationByGPS(data.gps.latitude, data.gps.longitude);
 			}
+		</script>
+		<script src="/public/js/gpsMap.js"></script>
+		<script>
 
+		</script>
+		<script src="/public/js/userListA.js">
 			function userStatus(temp, shock) {
 				if (shock) {
 					$("#user_status").html("충격감지");
@@ -182,54 +159,12 @@
 
 				else if (temp < 30 && !shock) {
 					$("#user_status").html("양호");
-					$("#user_status").css('color', '#71FE8D');
+					$("#user_status").css('color', '#081547');
 				}
 			}
+		</script>
+		<script>
 
-			var container = document.getElementById('gps');
-			var options = {
-				center: new kakao.maps.LatLng(33.450701, 126.570667),
-				level: 3
-			};
-
-			var map = new kakao.maps.Map(container, options);
-
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(function (position) {
-					var lat = position.coords.latitude, // latitude 위도
-						lon = position.coords.longitude; // longitude 경도
-
-					var locPosition = new kakao.maps.LatLng(lat, lon),
-						message = '<div style="padding:5px;">사용자 위치</div>';
-
-					displayMarker(locPosition, message);
-				});
-
-			} else {
-				var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
-					message = 'can\'t use Geolocation'
-
-				displayMarker(locPosition, message);
-			}
-
-			function displayMarker(locPosition, message) {
-				var marker = new kakao.maps.Marker({
-					map: map,
-					position: locPosition
-				});
-
-				var iwContent = message,
-					iwRemoveable = true;
-
-				var infowindow = new kakao.maps.InfoWindow({
-					content: iwContent,
-					removable: iwRemoveable
-				});
-
-				infowindow.open(map, marker);
-
-				map.setCenter(locPosition);
-			}    
 		</script>
 </body>
 
