@@ -104,9 +104,7 @@
 
 			function changeData(chart, data) {
 				var new_data = data.data;
-				/*chart.data.datasets.push({
-					data: new_data
-				});*/
+
 				chart.data.datasets.push(data);
 				chart.update();
 			}
@@ -131,14 +129,17 @@
 				removeData(graph);
 				changeData(graph, options_light);
 			}
+
+			viewTemp();
+
 			function socketCallback(data) {
-				viewTemp();
+
 				console.log(data);
-				insertDataOnChart(options_hum, parseFloat(data.dht.humid).toFixed(2));
-				insertDataOnChart(options_temp, parseFloat(data.dht.temp).toFixed(2));
-				insertDataOnChart(options_light, data.photoresitor);
+				insertDataOnChart(options_hum, parseFloat(data.humid).toFixed(1));
+				insertDataOnChart(options_temp, parseFloat(data.temp).toFixed(1));
+				insertDataOnChart(options_light, data.photoresistor);
 				graph.update();
-				setGeolocationByGPS(data.gps.latitude, data.gps.longitude);
+				setGeolocationByGPS(data.latitude, data.longitude);
 			}
 		</script>
 		<script src="/public/js/gpsMap.js"></script>

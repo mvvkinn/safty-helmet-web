@@ -1,15 +1,14 @@
 var socket = io();
 
 socket.on("helmetMsg", data => {
-  const sensor = data.sensor;
-  setListValues(sensor);
-  socketCallback(sensor);
+  setListValues(data);
+  socketCallback(data);
 });
 
 function setListValues(data) {
-  setText(`${data.dht.temp}ºC`, "#user_temp");
-  setText(`${data.dht.humid}%`, "#user_humid");
-  setText(`${data.photoresistor}lx`, "#user_lightness");
+  setText(`${parseFloat(data.temp).toFixed(1)}ºC`, "#user_temp");
+  setText(`${parseFloat(data.humid).toFixed(1)}%`, "#user_humid");
+  setText(`${parseFloat(data.photoresistor).toFixed(1)}lx`, "#user_lightness");
 }
 
 function setText(string, element) {
