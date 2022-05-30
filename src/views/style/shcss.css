@@ -292,7 +292,7 @@ body {
   margin-left: 30px;
 }
 
-#report_popup, #report_success {
+#report_popup, #report_success, #warning_popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -302,24 +302,25 @@ body {
   text-align:center;
 }
 
-#report_popup:after, #report_success:after {
+#report_popup:after, #report_success:after, #warning_popup::after {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
   content: '';
 }
 
-.report_inner, .report_success_inner {
+.report_inner, .report_success_inner, .warning_inner {
   display: inline-block;
   background-color: #f4f4f4;
   vertical-align: middle;
   width: 500px;
 }
 
-.report_font_section {
+.report_font_section, .warning_font_section {
   padding: 50px 0 0 0;
   height: 115px;
 }
+
 
 .report_font_1 {
   margin: 0 0 5px 0;
@@ -351,6 +352,13 @@ body {
 .report_popup_btn:hover {
   background-color: #081547;
   color: white;
+}
+
+.warning_font {
+  color: red;
+  font-size: 30px;
+  font-family: "Malgun Gothic";
+  font-weight: 900;
 }
 
 p {

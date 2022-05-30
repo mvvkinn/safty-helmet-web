@@ -72,14 +72,30 @@
 			</div>
 		</div>
 
+		<div id="warning_popup" style="display:none;">
+			<div class="warning_inner">
+				<div class="warning_font_section">
+					<div class="warning_font" style="margin:-20px 0 -10px 0;">WARNING</div>
+					<div class="warning_font" style="font-size:38px; margin:0 0 5px 0;">충격감지</div>
+					<div class="report_font_2">신고하시겠습니까?</div>
+				</div>
+				<div class="report_popup_btn_section">
+					<div class="report_popup_btn" onclick="successReport()">확인</div>
+					<div class="report_popup_btn" onclick="closeWarning()" style="border-left:1.5px solid #dfdfdf;">취소</div>
+				</div>
+			</div>
+		</div>
+
 		<script>
 
 			//신고버튼 팝업
 			var report_target = document.getElementById('report_popup');
 			var report_success = document.getElementById('report_success');
+        	var warning_target = document.getElementById('warning_popup');
 
 			function doReport() {
         	    report_target.style.display = 'block';
+            	warning_target.style.display = "none";
 			}
 			function closeReport() {
     	       report_target.style.display = 'none';
@@ -88,7 +104,12 @@
     	    function successReport() {
     	    	report_success.style.display = 'block';
 				report_target.style.display = 'none';
+            	warning_target.style.display = "none";
     	    }
+			
+			function closeWarning() {
+				warning_target.style.display = "none";
+			}
 
 			//그래프 출력
 			var options_temp = {
@@ -217,6 +238,7 @@
 				if (shock) {
 					$("#user_status").html("충격감지");
 					$("#user_status").css('color', '#ED1C24');
+					$("#warning_popup").css('display', 'block');
 				}
 
 				else if (temp > 35) {
