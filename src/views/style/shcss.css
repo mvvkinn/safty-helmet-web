@@ -129,17 +129,14 @@ body {
 
 .btn_section {
   display: flex;
-  align-items: center;
-  flex-direction: row;
   justify-content: center;
 }
 
 .btn_list {
-  width: 1665px;
-  display: flex;
+  width: 1660px;
+  display: inline-flex;
   flex-flow: wrap;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin: 30px;
 }
 
 .btn_normal {
@@ -367,3 +364,34 @@ p {
   font-size: 16px;
   font-family: "Malgun Gothic";
 }
+
+/* responsive css */
+/* full -> 1700px -> 1400px -> 1000px */
+@media (max-width: 1700px) {
+  .btn_list {
+    width: 1230px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .btn_list {
+    width: 820px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .main_title_text_1 {
+    font-size: 40px;
+  }
+
+  .main_title_text_2 {
+    font-size: 10px;
+    margin-left: 10px;
+    letter-spacing: 13px;
+  }
+  
+  .btn_list {
+    width: 400px;
+  }
+}
+
