@@ -41,22 +41,3 @@ io.on("connection", socket => {
     console.log(data);
   });
 });
-
-// json type check function
-function isStringJson(str) {
-  try {
-    var json = JSON.parse(str);
-    return typeof json === "object";
-  } catch (e) {
-    return false;
-  }
-}
-
-function stringToJson(str) {
-  try {
-    var json = JSON.parse(str);
-    return json;
-  } catch (e) {
-    return str;
-  }
-}
