@@ -4,12 +4,13 @@ const config = require("../config/config.json").mysql;
 const pool = mysql.createPool(config).promise();
 
 // get all helmet data from DB
-const getHelmetData = async (req, res) => {
+const userDashboard = async (req, res) => {
   try {
-    const sql = "SELECT * FROM `helmet` WHERE `helmet`.`helmet_id` = 1";
-    const data = await pool.query(sql);
+    const sql =
+      "SELECT * FROM helmet INNER JOIN worker on worker.worker_id = helmet.worker_id WHERE helmet_id = ?";
+    const [data] = await pool.query(sql, req.params.id);
 
-    res.json(data[0]);
+    res.render("userDashboard", { helmet: data });
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
@@ -29,7 +30,7 @@ const getHelmetNum = async (req, res) => {
 
 const getUpdatedTime = async (req, res) => {
   try {
-    const sql = "SELECT updated_time FROM helmet"; // where helmet_id = " + req
+    const sql = "SELECT updated_time FROM helmet";
     const data = await pool.query(sql);
 
     res.json(data[0]);
@@ -38,4 +39,4 @@ const getUpdatedTime = async (req, res) => {
   }
 };
 
-module.exports = { getHelmetData, getHelmetNum, getUpdatedTime };
+module.exports = { userDashboard, getHelmetNum, getUpdatedTime };

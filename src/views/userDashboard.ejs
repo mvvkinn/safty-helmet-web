@@ -1,0 +1,101 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cd279f7aad64d95a68830694bdd2c95f"></script>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link href="../style/shcss.css" rel="stylesheet">
+    <title>[DASHBOARD]<%= helmet[0].worker_name%>
+    </title>
+</head>
+
+<body>
+    <div class="dashboard_title_section">
+        <div class="back_btn_section_2">
+            <div class="back_btn_2" onclick="location.href='../workerList/<%= helmet[0].field_id%>'">
+                < BACK </div>
+            </div>
+            <div class="dashboard_title">
+                <%= helmet[0].worker_name%>
+            </div>
+            <div class="report_btn_section">
+                <div class="report_btn">긴급 신고</div>
+            </div>
+        </div>
+        <div id="info_list_section">
+            <div id="info_section" onclick="viewTemp();">
+                <div id="info_title">기온</div>
+                <div class="info_value" id="user<%= helmet[0].helmet_id %>_temp">
+                    <%= helmet[0].temp %>ºC
+                </div>
+            </div>
+            <div id="info_section" onclick="viewHum();">
+                <div id="info_title">습도</div>
+                <div class="info_value" id="user<%= helmet[0].helmet_id %>_humid">
+                    <%= helmet[0].humid %>%
+                </div>
+            </div>
+            <div id="info_section" onclick="viewLight();">
+                <div id="info_title">광량</div>
+                <div class="info_value" id="user<%= helmet[0].helmet_id %>_lightness">
+                    <%= helmet[0].photoresistor %>lx
+                </div>
+            </div>
+            <div style="margin:15px; box-shadow: 3px 3px 3px #DFDFDF;">
+                <div id="info_title">사용자 상태</div>
+                <div class="info_value" id="user<%= helmet[0].helmet_id %>_status">양호</div>
+            </div>
+        </div>
+        <div id="lower_section">
+            <div id="graph_section">
+                <canvas id="graph" height="95px"></canvas>
+            </div>
+            <div id="gps" height="75px"></div>
+        </div>
+        <script>
+            const helmet_id = [];
+
+            <% helmet.forEach(element => { %>
+                helmet_id.push(<%= element.helmet_id %>);
+            <% });%>
+
+                function socketCallback(data) {
+                    console.log(data);
+                    insertDataOnChart(options_hum, parseFloat(data.humid).toFixed(1));
+                    insertDataOnChart(options_temp, parseFloat(data.temp).toFixed(1));
+                    insertDataOnChart(options_light, data.photoresistor);
+                    graph.update();
+                    setGeolocationByGPS(data.latitude, data.longitude);
+                }
+
+            function userStatus(temp, shock) {
+                if (shock) {
+                    $("#user" + helmet_id + "_status").html("충격감지");
+                    $("#user" + helmet_id + "_status").css('color', '#ED1C24');
+                }
+
+                else if (temp > 33) {
+                    $("#user" + helmet_id + "_status").html("현장 온도 높음");
+                    $("#user" + helmet_id + "_status").css('color', '#ED1C24');
+                }
+
+                else if (temp < 1) {
+                    $("#user" + helmet_id + "_status").html("현장 온도 낮음");
+                    $("#user" + helmet_id + "_status").css('color', '#ED1C24');
+                }
+
+                else if (temp < 30 && !shock) {
+                    $("#user" + helmet_id + "_status").html("양호");
+                }
+            }
+        </script>
+        <script src="/js/userListA.js"></script>
+        <script src="/js/chartboard.js"></script>
+        <script src="/js/gpsMap.js"></script>
+
+</body>
+
+</html>

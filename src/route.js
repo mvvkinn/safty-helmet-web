@@ -1,17 +1,21 @@
 import express from "express";
 const {
-  getHelmetData,
+  userDashboard,
   getHelmetNum,
   getUpdatedTime,
 } = require("../controller/helmet");
+const { getFieldData } = require("../controller/field");
+const { workerList } = require("../controller/worker");
 
 const router = express.Router();
 
-router.get("/", (res, req) => {
-  res.sendFile("index.html");
-});
+//main
+router.get("/", getFieldData);
 
-router.get("/getHelmetData", getHelmetData);
+router.get("/workerList/:id", workerList);
+router.get("/userDashboard/:id", userDashboard);
+
+//APIs
 router.get("/getHelmetNum", getHelmetNum);
 router.get("/getUpdatedTime", getUpdatedTime);
 

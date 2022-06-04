@@ -8,6 +8,7 @@
   "mysql": {
     "host": "",
     "user": "",
-    "password": ""
+    "password": "",
+    "database": ""
   }
 }
