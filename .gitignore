@@ -2,12 +2,6 @@ persistance/config/config.json
 node_modules
 .idea
 
-embed/pio
-embed/vscode/.browse.c_cpp.db*
-embed/vscode/c_cpp_properties.json
-embed/vscode/launch.json
-embed/vscode/ipch
-
 business/config.json
 workspace.code-workspace
 
@@ -18,3 +12,6 @@ view/tset.html
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+
+#credentials
+config/config.json
