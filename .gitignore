@@ -5,7 +5,8 @@ node_modules
 business/config.json
 workspace.code-workspace
 
-view/tset.html
+src/views/test.html
+src/views/style/testcss.css
 
 .pio
 .vscode/.browse.c_cpp.db*
