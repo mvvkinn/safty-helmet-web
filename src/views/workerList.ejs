@@ -56,6 +56,7 @@
         <script>
             const helmet_id = [];
 
+            //get ids from ejs
             <% worker.forEach(element => { %>
                 helmet_id.push(<%= element.helmet_id %>);
             <% });%>
