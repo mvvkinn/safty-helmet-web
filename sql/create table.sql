@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS helmet (
     shock BOOLEAN,
     
     worker_danger BOOLEAN,
-    updated_time DATETIME NOT NULL DEFAULT TIMESTAMP,
+    updated_time DATETIME NOT NULL DEFAULT current_TIMESTAMP,
 
     PRIMARY KEY (helmet_id),
     FOREIGN KEY (worker_id) REFERENCES worker(worker_id) ON DELETE CASCADE

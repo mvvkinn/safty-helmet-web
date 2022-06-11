@@ -30,6 +30,7 @@ client.on("message", function (topic, msg, packet) {
     pool.query(sql, json);
 
     socket.emit("helmetMsg", json);
+    console.log(json);
   } else {
     socket.emit("msg", msg);
     console.log();
