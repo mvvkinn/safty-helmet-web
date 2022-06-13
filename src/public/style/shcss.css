@@ -291,6 +291,7 @@ body {
 }
 
 #gps {
+  z-index: 1;
   background-color: white;
   float: left;
   width: 400px;
@@ -302,6 +303,7 @@ body {
 #report_popup,
 #report_success,
 #warning_popup {
+  z-index: 2;
   position: fixed;
   top: 0;
   left: 0;
