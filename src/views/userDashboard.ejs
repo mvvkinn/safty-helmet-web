@@ -134,7 +134,9 @@
                 report_target.style.display = 'none';
                 warning_target.style.display = "none";
             }
-
+            function doWarning() {
+                warning_target.style.display = "block";
+            }
             function closeWarning() {
                 warning_target.style.display = "none";
             }
@@ -142,7 +144,7 @@
 
             function userStatus(temp, shock) {
                 if (shock) {
-                    doReport();
+                    doWarning();
                     $("#user" + helmet_id + "_status").html("충격감지");
                     $("#user" + helmet_id + "_status").css('color', '#ED1C24');
                 }
