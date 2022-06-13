@@ -626,6 +626,27 @@ p {
     height: 220px;
     margin: 30px 0 0 0;
   }
+
+  .report_inner,
+  .report_success_inner,
+  .warning_inner {
+    width: 350px;
+  }
+
+  .report_font_section,
+  .warning_font_section {
+    height: 300px;
+  }
+
+  .report_font_1,
+  .warning_font {
+    font-size: 25px;
+    margin: 100px 0 5px 0;
+  }
+
+  .report_font_2 {
+    font-size: 15px;
+  }
 }
 
 @media (max-width: 700px) {
