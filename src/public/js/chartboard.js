@@ -68,8 +68,8 @@ var options_hum = {
 var options_light = {
   label: "Lightness",
   data: [],
-  backgroundColor: "rgba(255, 255, 154, 0.4)",
-  borderColor: "rgba(255, 255, 154)",
+  backgroundColor: "rgba(232, 119, 68, 0.4)",
+  borderColor: "rgba(232, 119, 68)",
   borderWidth: 1,
 };
 function insertDataOnChart(chart_data, new_data) {
