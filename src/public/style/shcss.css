@@ -591,6 +591,7 @@ p {
 
 @media (max-width: 900px) {
   #info_title {
+    text-align: center;
     width: 110px;
   }
 
