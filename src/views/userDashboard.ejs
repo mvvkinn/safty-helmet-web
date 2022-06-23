@@ -67,10 +67,13 @@
                 </div>
                 <div class="report_popup_btn_section">
                     <!--신고 및 충격감지 팝업 버튼-->
-                    <div id="popup_yes_btn" class="report_popup_btn" onclick="successReport()" style="display:block;">확인</div>
-                    <div id="popup_no_btn" class="report_popup_btn" onclick="closeReport()" style="border-left:1.5px solid #dfdfdf; display:block;">취소</div>
+                    <div id="popup_yes_btn" class="report_popup_btn" onclick="successReport()" style="display:block;">확인
+                    </div>
+                    <div id="popup_no_btn" class="report_popup_btn" onclick="closeReport()"
+                        style="border-left:1.5px solid #dfdfdf; display:block;">취소</div>
                     <!--확인 클릭 시-->
-                    <div id="popup_close_btn" class="report_popup_btn" onclick="closeReport()" style="width:100%; display:none;">닫기</div>
+                    <div id="popup_close_btn" class="report_popup_btn" onclick="closeReport()"
+                        style="width:100%; display:none;">닫기</div>
                 </div>
             </div>
         </div>
@@ -92,7 +95,7 @@
                 }
 
 
-            function userStatus(temp, shock) {
+            function userStatus(temp, shock, helmet_id, danger) {
                 if (shock) {
                     doWarning();
                     $("#user" + helmet_id + "_status").html("충격감지");
@@ -106,6 +109,12 @@
 
                 else if (temp < 1) {
                     $("#user" + helmet_id + "_status").html("현장 온도 낮음");
+                    $("#user" + helmet_id + "_status").css('color', '#ED1C24');
+                }
+
+                else if (danger) {
+                    doMove();
+                    $("#user" + helmet_id + "_status").html("의식없음");
                     $("#user" + helmet_id + "_status").css('color', '#ED1C24');
                 }
 

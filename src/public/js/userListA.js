@@ -27,7 +27,7 @@ function setListValues(data) {
     "#user" + data.helmet_id + "_lightness"
   );
 
-  userStatus(data.temp, data.shock, data.helmet_id);
+  userStatus(data.temp, data.shock, data.helmet_id, data.worker_danger);
 }
 
 function setText(string, element) {
