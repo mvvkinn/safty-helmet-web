@@ -102,19 +102,19 @@
                     $("#user" + helmet_id + "_status").css('color', '#ED1C24');
                 }
 
-                else if (temp > 33) {
+                else if (danger) {
+                    doMove();
+                    $("#user" + helmet_id + "_status").html("의식없음");
+                    $("#user" + helmet_id + "_status").css('color', '#ED1C24');
+                }
+
+                if (temp > 33) {
                     $("#user" + helmet_id + "_status").html("현장 온도 높음");
                     $("#user" + helmet_id + "_status").css('color', '#ED1C24');
                 }
 
                 else if (temp < 1) {
                     $("#user" + helmet_id + "_status").html("현장 온도 낮음");
-                    $("#user" + helmet_id + "_status").css('color', '#ED1C24');
-                }
-
-                else if (danger) {
-                    doMove();
-                    $("#user" + helmet_id + "_status").html("의식없음");
                     $("#user" + helmet_id + "_status").css('color', '#ED1C24');
                 }
 
