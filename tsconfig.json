@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ES6",
+
+    /* Modules */
+    "module": "commonjs",
+    "rootDir": "./",
+    "baseUrl": ".",
+    "paths": {
+      "@*": ["src/*"]
+    },
+
+    /* JavaScript Support */
+    "allowJs": true,
+
+    /* Emit */
+    "outDir": "./build",
+
+    /* Interop Constraints */
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    /* Completeness */
+    "skipLibCheck": true
+  },
+
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "tests"]
+}

@@ -1,4 +1,6 @@
 {
+  "watch": ["src", ".env"],
+  "ext": "js, ts, json",
   "ignore": ["src/public/*"],
-  "exec": "babel-node"
+  "exec": "ts-node -r tsconfig-paths/register ./src/app.ts"
 }

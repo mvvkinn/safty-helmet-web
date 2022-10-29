@@ -1,8 +1,7 @@
-persistance/config/config.json
 node_modules
+build
 .idea
 
-business/config.json
 workspace.code-workspace
 
 src/views/test.html
