@@ -1,0 +1,134 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cd279f7aad64d95a68830694bdd2c95f"></script>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" content="upgrade-insecure-requests">
+    <link href="../style/shcss.css" rel="stylesheet">
+    <title>[DASHBOARD]<%= helmet[0].worker_name%>
+    </title>
+</head>
+
+<body>
+    <div class="dashboard_title_section">
+        <div class="back_btn_section_2">
+            <div class="back_btn_2" onclick="location.href='../workerList/<%= helmet[0].field_id%>'">
+                < BACK </div>
+            </div>
+            <div class="dashboard_title">
+                <%= helmet[0].worker_name%>
+            </div>
+            <div class="report_btn_section">
+                <div class="report_btn" onclick="doReport()">긴급 신고</div>
+            </div>
+        </div>
+        <div id="info_list_section">
+            <div id="info_section" onclick="viewTemp();">
+                <div id="info_title">기온</div>
+                <div class="info_value" id="user<%= helmet[0].helmet_id %>_temp">
+                    <!-- id=user1231_temp-->
+                    <%= helmet[0].temp %>ºC
+                </div>
+            </div>
+            <div id="info_section" onclick="viewHum();">
+                <div id="info_title">습도</div>
+                <div class="info_value" id="user<%= helmet[0].helmet_id %>_humid">
+                    <%= helmet[0].humid %>%
+                </div>
+            </div>
+            <div id="info_section" onclick="viewLight();">
+                <div id="info_title">광량</div>
+                <div class="info_value" id="user<%= helmet[0].helmet_id %>_lightness">
+                    <%= helmet[0].photoresistor %>lx
+                </div>
+            </div>
+            <div id="info_section" style="pointer-events: none;">
+                <div id="info_title">사용자 상태</div>
+                <div class="info_value" id="user<%= helmet[0].helmet_id %>_status">양호</div>
+            </div>
+        </div>
+        <div id="lower_section">
+            <div id="graph_section">
+                <canvas id="graph" height="95px"></canvas>
+            </div>
+            <div id="gps" height="75px"></div>
+        </div>
+
+
+        <div id="report_popup" style="display:none;">
+            <div class="report_inner">
+                <div class="report_font_section">
+                    <!--신고버튼 팝업 문구-->
+                    <div id="report_font_1" class="report_font_1" style="display:block;">신고하시겠습니까?</div>
+                    <div id="report_font_2" class="report_font_2" style="display:block;">구급차가 빠르게 현장으로 출동합니다.</div>
+                </div>
+                <div class="report_popup_btn_section">
+                    <!--신고 및 충격감지 팝업 버튼-->
+                    <div id="popup_yes_btn" class="report_popup_btn" onclick="successReport()" style="display:block;">확인
+                    </div>
+                    <div id="popup_no_btn" class="report_popup_btn" onclick="closeReport()"
+                        style="border-left:1.5px solid #dfdfdf; display:block;">취소</div>
+                    <!--확인 클릭 시-->
+                    <div id="popup_close_btn" class="report_popup_btn" onclick="closeReport()"
+                        style="width:100%; display:none;">닫기</div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const helmet_id = [];
+
+            <% helmet.forEach(element => { %>
+                helmet_id.push(<%= element.helmet_id %>);
+            <% });%>
+
+                function socketCallback(data) {
+                    console.log(data);
+                    insertDataOnChart(options_hum, parseFloat(data.humid).toFixed(1));
+                    insertDataOnChart(options_temp, parseFloat(data.temp).toFixed(1));
+                    insertDataOnChart(options_light, data.photoresistor);
+                    graph.update();
+                    setGeolocationByGPS(data.latitude, data.longitude);
+                }
+
+
+            function userStatus(temp, shock, helmet_id, danger) {
+                if (shock) {
+                    doWarning();
+                    $("#user" + helmet_id + "_status").html("충격감지");
+                    $("#user" + helmet_id + "_status").css('color', '#ED1C24');
+                }
+
+                else if (danger) {
+                    doMove();
+                    $("#user" + helmet_id + "_status").html("의식없음");
+                    $("#user" + helmet_id + "_status").css('color', '#ED1C24');
+                }
+
+                if (temp > 33) {
+                    $("#user" + helmet_id + "_status").html("현장 온도 높음");
+                    $("#user" + helmet_id + "_status").css('color', '#ED1C24');
+                }
+
+                else if (temp < 1) {
+                    $("#user" + helmet_id + "_status").html("현장 온도 낮음");
+                    $("#user" + helmet_id + "_status").css('color', '#ED1C24');
+                }
+
+                else {
+                    $("#user" + helmet_id + "_status").html("양호");
+                    $("#user" + helmet_id + "_status").css('color', '#081547');
+                }
+            }
+        </script>
+        <script src="/js/userListA.js"></script>
+        <script src="/js/chartboard.js"></script>
+        <script src="/js/gpsMap.js"></script>
+        <script src="/js/popup.js"></script>
+
+</body>
+
+</html>
