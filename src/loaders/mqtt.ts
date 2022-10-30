@@ -14,13 +14,17 @@ export default async () => {
 
   client.on("message", (topic, msg, packet) => {
     const json = stringToJson(String(msg));
+
+    /**
+     * @TODO Socket emit 추가 json = "helmetMsg", string = "msg"
+     */
     if (!json) {
     }
   });
 };
 
 /**
- *
+ * Convert string to JSON
  * @param str
  * @returns typeof(JSON.parse(str)) == JSON ? JSON : false
  */
