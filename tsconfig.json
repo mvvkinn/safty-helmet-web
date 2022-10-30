@@ -16,6 +16,8 @@
 
     /* Emit */
     "outDir": "./build",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
 
     /* Interop Constraints */
     "allowSyntheticDefaultImports": true,

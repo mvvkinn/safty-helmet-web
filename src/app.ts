@@ -1,6 +1,7 @@
 import express from "express";
 import config from "@config";
 import loaders from "@loaders";
+import logger from "@loaders/logger";
 
 async function startService() {
   const app = express();
@@ -8,7 +9,7 @@ async function startService() {
   await loaders(app);
 
   app.listen(config.port, () => {
-    console.log(`Server running on http://localhost:${config.port}`);
+    logger.info(`Server running on http://localhost:${config.port}`);
   });
 }
 

@@ -13,5 +13,5 @@ export default async (expressApp: Application) => {
   logger.info("MQTT Loaded");
 
   await dependencyInjector();
-  logger.info("Dependency Injector loaded");
+  logger.info("Dependency Injector loaded\n");
 };

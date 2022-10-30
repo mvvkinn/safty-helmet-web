@@ -20,18 +20,13 @@ export class Model<T> {
     return await this.Query(sql, data);
   }
 
-  async Read(data?: object) {
-    if (data) {
-      const sql = `SELECT ? FROM ${this.table}`;
-      const record = await this.Query(sql, data);
+  async Read(attribute?: any) {
+    const sql = !attribute
+      ? `SELECT * FROM ${this.table}`
+      : `SELECT ${attribute} FROM ${this.table}`;
+    const record = await this.Query(sql);
 
-      return { ...record[0] };
-    } else {
-      const sql = `SELECT * FROM ${this.table}`;
-      const record = await this.Query(sql);
-
-      return { ...record[0] };
-    }
+    return { ...record[0] };
   }
 
   async Delete() {}
@@ -40,7 +35,7 @@ export class Model<T> {
     const sql = `SELECT * FROM ${this.table} WHERE ?`;
 
     const record = await this.Query(sql, data);
-    const recordDTO: T = Object(record[0]);
+    const recordDTO: T = Object(record);
 
     return { ...recordDTO };
   }

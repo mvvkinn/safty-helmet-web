@@ -1,0 +1,673 @@
+@charset "UTF-8";
+
+body {
+  background-color: #f4f4f4;
+  margin: 0px;
+  padding: 0px;
+}
+
+.main_title {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px;
+  height: 400px;
+  background-color: white;
+  box-shadow: 3px 3px 3px #dfdfdf;
+}
+
+.main_title_2 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px;
+  height: 350px;
+  background-color: white;
+  box-shadow: 3px 3px 3px #dfdfdf;
+}
+
+.dashboard_title_section {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 3px 3px 3px #dfdfdf;
+}
+
+.dashboard_title {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px;
+  height: 150px;
+  color: #081547;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.back_btn_section_1 {
+  height: 50px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.back_btn_section_2 {
+  width: 10%;
+  height: 150px;
+  background-color: white;
+}
+
+.back_btn_1 {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #081547;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Malgun Gothic";
+  cursor: pointer;
+}
+
+.back_btn_2 {
+  margin-top: 11px;
+  margin-left: 20px;
+  color: #081547;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Malgun Gothic";
+  cursor: pointer;
+}
+
+.report_btn_section {
+  width: 10%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.report_btn {
+  width: 100px;
+  height: 120px;
+  background-color: #ed1c24;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: "Malgun Gothic";
+  box-shadow: 3px 3px 3px #491113;
+  cursor: pointer;
+}
+
+.report_btn:active {
+  margin-left: 5px;
+  margin-top: 5px;
+  box-shadow: none;
+}
+
+.main_title_text_1 {
+  color: #081547;
+  margin: 0px;
+  font-size: 60px;
+  font-weight: 700;
+}
+
+.main_title_text_2 {
+  color: #081547;
+  margin-top: 0px;
+  margin-left: 15px;
+  font-size: 20px;
+  font-weight: 100;
+  letter-spacing: 16.5px;
+}
+
+.main_title_address {
+  margin-top: 0px;
+  margin-left: 15px;
+  font-size: 16px;
+  font-weight: 100;
+}
+
+.btn_section {
+  display: flex;
+  justify-content: center;
+}
+
+.btn_list {
+  width: 1660px;
+  display: inline-flex;
+  flex-flow: wrap;
+  margin: 30px;
+}
+
+.btn_normal {
+  width: 350px;
+  height: 70px;
+  background-color: white;
+  line-height: 70px;
+  margin: 30px;
+  text-align: center;
+  color: #081547;
+  font-size: 16px;
+  font-family: "Malgun Gothic";
+  cursor: pointer;
+  box-shadow: 3px 3px 3px #dfdfdf;
+}
+
+.btn_normal:hover {
+  background-color: #081547;
+  color: white;
+}
+
+.user_list_menu_section {
+  padding-left: 67px;
+  padding-right: 67px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  border-bottom: 1px solid #585858;
+}
+
+.user_list_menu {
+  width: 100px;
+  color: #081547;
+  text-align: center;
+  font-size: 16px;
+  font-family: "Malgun Gothic";
+}
+
+.user_list_section {
+  padding-left: 67px;
+  padding-right: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.user_list {
+  width: 100px;
+  color: #081547;
+  text-align: center;
+  font-size: 16px;
+  font-family: "Malgun Gothic";
+}
+
+.user_list_section:hover {
+  background-color: #081547;
+}
+
+.user_list_section:hover > .user_list {
+  color: white;
+  border: none;
+}
+
+.scroll {
+  height: 450px;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 7px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #585858;
+  border-radius: 10px;
+}
+
+#info_list_section {
+  padding: 15px;
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#info_section {
+  cursor: pointer;
+  margin: 15px;
+  box-sizing: border-box;
+  box-shadow: 3px 3px 3px #dfdfdf;
+}
+
+#info_section:hover > .info_value {
+  background-color: #ededed;
+  color: #081547;
+}
+
+#info_title {
+  background-color: #081547;
+  width: 350px;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
+  font-family: "Malgun Gothic";
+}
+
+.info_value {
+  background-color: white;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 50px;
+  font-family: "Malgun Gothic";
+  color: 041940;
+}
+
+#lower_section {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  padding: 20px 0 30px 0px;
+}
+
+#graph_section {
+  background-color: white;
+  float: left;
+  width: 1100px;
+  height: 360px;
+  padding: 20px;
+  box-shadow: 3px 3px 3px #dfdfdf;
+}
+
+#gps {
+  z-index: 1;
+  background-color: white;
+  float: left;
+  width: 400px;
+  height: 400px;
+  box-shadow: 3px 3px 3px #dfdfdf;
+  margin-left: 30px;
+}
+
+#report_popup,
+#report_success,
+#warning_popup {
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+#report_popup:after,
+#report_success:after,
+#warning_popup::after {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  content: "";
+}
+
+.report_inner,
+.report_success_inner,
+.warning_inner {
+  display: inline-block;
+  background-color: #f4f4f4;
+  vertical-align: middle;
+  width: 500px;
+}
+
+.report_font_section,
+.warning_font_section {
+  padding: 50px 0 0 0;
+  height: 115px;
+}
+
+.report_font_1 {
+  margin: 0 0 5px 0;
+  font-size: 30px;
+  color: red;
+  font-weight: 700;
+}
+
+.report_font_2 {
+  font-size: 16px;
+  color: black;
+  font-weight: 300;
+}
+
+.report_popup_btn_section {
+  display: flex;
+}
+
+.report_popup_btn {
+  width: 50%;
+  height: 40px;
+  padding: 20px 0 0 0;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  border-top: 1.5px solid #dfdfdf;
+}
+
+.report_popup_btn:hover {
+  background-color: #081547;
+  color: white;
+}
+
+.warning_font {
+  color: red;
+  font-size: 30px;
+  font-family: "Malgun Gothic";
+  font-weight: 900;
+}
+
+p {
+  color: #081547;
+  font-size: 16px;
+  font-family: "Malgun Gothic";
+}
+
+/* responsive css */
+/* full -> 1700px -> 1400px -> 1000px */
+@media (max-width: 1700px) {
+  .btn_list {
+    width: 1230px;
+  }
+}
+
+@media (max-width: 1650px) {
+  #info_title {
+    width: 300px;
+  }
+
+  .info_value {
+    height: 180px;
+    font-size: 45px;
+  }
+
+  #graph_section {
+    width: 950px;
+    height: 310px;
+  }
+
+  #gps {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 1500px) {
+  #info_title {
+    width: 270px;
+  }
+
+  .info_value {
+    height: 160px;
+    font-size: 40px;
+  }
+
+  #graph_section {
+    width: 830px;
+    height: 310px;
+    padding: 40px 20px 0px 20px;
+  }
+
+  #gps {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .btn_list {
+    width: 820px;
+  }
+
+  #info_title {
+    width: 240px;
+    font-size: 14px;
+  }
+
+  .info_value {
+    height: 140px;
+    font-size: 35px;
+  }
+
+  #graph_section {
+    width: 730px;
+    height: 290px;
+    padding: 40px 20px 0px 20px;
+  }
+
+  #gps {
+    width: 330px;
+    height: 330px;
+  }
+}
+
+@media (max-width: 1300px) {
+  #info_title {
+    width: 200px;
+    height: 15px;
+    padding-bottom: 13px;
+  }
+
+  .info_value {
+    height: 120px;
+    font-size: 30px;
+  }
+
+  #graph_section {
+    width: 610px;
+    height: 270px;
+    padding: 40px 10px 0px 10px;
+  }
+
+  #gps {
+    width: 310px;
+    height: 310px;
+  }
+}
+
+@media (max-width: 1150px) {
+  #info_title {
+    width: 180px;
+  }
+
+  .info_value {
+    height: 100px;
+    font-size: 25px;
+  }
+
+  #graph_section {
+    width: 570px;
+    height: 220px;
+    padding: 50px 10px 0px 10px;
+  }
+
+  #gps {
+    width: 270px;
+    height: 270px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .main_title {
+    height: 250px;
+  }
+
+  .main_title_2 {
+    height: 200px;
+  }
+
+  .scroll {
+    height: 700px;
+  }
+
+  .main_title_text_1 {
+    font-size: 35px;
+  }
+
+  .main_title_text_2 {
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
+
+  .back_btn_1 {
+    font-size: 16px;
+  }
+
+  .back_btn_2 {
+    margin-top: 14px;
+    font-size: 16px;
+  }
+
+  .back_btn_section_2 {
+    width: 30%;
+  }
+
+  .report_btn_section {
+    padding-left: 20px;
+    width: 30%;
+  }
+
+  .report_btn {
+    width: 75px;
+    height: 90px;
+    font-size: 14px;
+  }
+
+  .btn_list {
+    width: 400px;
+  }
+
+  .user_list_menu {
+    font-size: 14px;
+    width: 20px;
+  }
+
+  .user_list {
+    font-size: 14px;
+    width: 200px;
+  }
+
+  #info_title {
+    font-size: 12px;
+    width: 140px;
+    padding-bottom: 10px;
+  }
+
+  .info_value {
+    height: 80px;
+    font-size: 20px;
+  }
+
+  #graph_section {
+    width: 460px;
+    height: 170px;
+    padding: 50px 10px 0px 10px;
+  }
+
+  #gps {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 900px) {
+  #info_title {
+    text-align: center;
+    width: 110px;
+  }
+
+  .info_value {
+    height: 60px;
+    font-size: 18px;
+  }
+
+  #info_section {
+    margin: 10px;
+  }
+
+  #lower_section {
+    width: 580px;
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0;
+    text-align: center;
+  }
+
+  #graph_section {
+    width: 100%;
+    height: 170px;
+    padding: 20px 10px 20px 10px;
+  }
+
+  #gps {
+    width: 100%;
+    height: 220px;
+    margin: 30px 0 0 0;
+  }
+
+  .report_inner,
+  .report_success_inner,
+  .warning_inner {
+    width: 350px;
+  }
+
+  .report_font_section,
+  .warning_font_section {
+    height: 300px;
+  }
+
+  .report_font_1,
+  .warning_font {
+    font-size: 25px;
+    margin: 100px 0 5px 0;
+  }
+
+  .report_font_2 {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 700px) {
+  #info_title {
+    width: 80px;
+  }
+
+  .info_value {
+    height: 50px;
+    font-size: 16px;
+  }
+
+  #info_section {
+    margin: 5px;
+  }
+
+  #lower_section {
+    width: 430px;
+  }
+
+  #graph_scetion {
+    padding: 0;
+  }
+}
