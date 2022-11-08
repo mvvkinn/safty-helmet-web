@@ -1,40 +1,27 @@
 import { Container } from "typedi";
 import { Logger } from "winston";
 import { Response, Request, NextFunction } from "express";
-import Worker from "@models/Worker";
-import Field from "@models/Field";
-import Helmet from "@models/Helmet";
+import { Sequelize } from "sequelize";
 
-const getWorker = async (req: Request, res: Response, next: NextFunction) => {
-  const Logger: Logger = Container.get("logger");
+const getHelmet = async (req: Request, res: Response, next: NextFunction) => {
+  const logger: Logger = Container.get("logger");
+  const db: Sequelize = Container.get("db");
+  const helmetModel = db.models.Helmet;
 
   try {
-    const workerRecord = await Worker.Read([
-      "worker_id",
-      "worker_name",
-      "field_id",
-    ]);
-    console.log(workerRecord);
-    const fieldRecord = await Field.Read("*", {});
-    console.log(fieldRecord);
+    const helmetRecord = await helmetModel.findByPk(req.params.id, {
+      include: "Worker",
+    });
 
-    //id, name, temperature, humid, ligntness, status
-    const helmetRecord = await Helmet.Read([
-      "helmet_id",
-      "worker_id",
-      "temp",
-      "humid",
-      "photoresistor",
-      "shock",
-      "worker_danger",
-    ]);
     console.log(helmetRecord);
 
-    res.render("workerList.ejs", { worker: workerRecord });
+    res.render("userDashboard", {
+      helmet: helmetRecord,
+    });
   } catch (e) {
-    Logger.error("Error reading Worker", e);
+    logger.error("Error reading Worker", e);
     next(e);
   }
 };
 
-export default getWorker;
+export default getHelmet;

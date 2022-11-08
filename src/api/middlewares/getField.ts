@@ -1,12 +1,17 @@
 import { Container } from "typedi";
 import { Logger } from "winston";
 import { Response, Request, NextFunction } from "express";
-import Field from "@models/Field";
+import { Sequelize } from "sequelize";
 
 const getField = async (req: Request, res: Response, next: NextFunction) => {
   const logger: Logger = Container.get("logger");
+  const db: Sequelize = Container.get("db");
+  const fieldModel = db.models.Field;
+
   try {
-    const record = await Field.Read(["field_id", "field_name"]);
+    const record = await fieldModel.findAll();
+
+    logger.debug(`Requesting Field.. \n Records: ${record}`);
 
     res.render("index.ejs", { field: record });
   } catch (e) {
