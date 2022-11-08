@@ -10,6 +10,7 @@
   "author": "mvvkinn <wo7910@naver.com>",
   "license": "ISC",
   "dependencies": {
+    "async-mqtt": "^2.6.3",
     "chartjs": "^0.3.24",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
@@ -22,8 +23,10 @@
     "mqtt": "^4.3.7",
     "mysql2": "^2.3.3",
     "node-telegram-bot-api": "^0.58.0",
+    "sequelize": "^6.25.3",
     "socket.io": "^4.5.0",
     "socket.io-client": "^4.5.0",
+    "socketio": "^1.0.0",
     "typedi": "^0.10.0",
     "winston": "^3.8.2"
   },
