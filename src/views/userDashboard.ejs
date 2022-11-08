@@ -6,20 +6,20 @@
 <html>
 
 <head>
-    <meta charset="UTF-8" content="upgrade-insecure-requests">
+    <meta charset="UTF-8">
     <link href="../style/shcss.css" rel="stylesheet">
-    <title>[DASHBOARD]<%= helmet[0].worker_name%>
+    <title>[DASHBOARD]<%= helmet.Worker.worker_name%>
     </title>
 </head>
 
 <body>
     <div class="dashboard_title_section">
         <div class="back_btn_section_2">
-            <div class="back_btn_2" onclick="location.href='../workerList/<%= helmet[0].field_id%>'">
+            <div class="back_btn_2" onclick="location.href='../workerList/<%= helmet.Worker.field_id%>'">
                 < BACK </div>
             </div>
             <div class="dashboard_title">
-                <%= helmet[0].worker_name%>
+                <%= helmet.Worker.worker_name%>
             </div>
             <div class="report_btn_section">
                 <div class="report_btn" onclick="doReport()">긴급 신고</div>
@@ -28,26 +28,26 @@
         <div id="info_list_section">
             <div id="info_section" onclick="viewTemp();">
                 <div id="info_title">기온</div>
-                <div class="info_value" id="user<%= helmet[0].helmet_id %>_temp">
+                <div class="info_value" id="user<%= helmet.helmet_id %>_temp">
                     <!-- id=user1231_temp-->
-                    <%= helmet[0].temp %>ºC
+                    <%= helmet.temp %>ºC
                 </div>
             </div>
             <div id="info_section" onclick="viewHum();">
                 <div id="info_title">습도</div>
-                <div class="info_value" id="user<%= helmet[0].helmet_id %>_humid">
-                    <%= helmet[0].humid %>%
+                <div class="info_value" id="user<%= helmet.helmet_id %>_humid">
+                    <%= helmet.humid %>%
                 </div>
             </div>
             <div id="info_section" onclick="viewLight();">
                 <div id="info_title">광량</div>
-                <div class="info_value" id="user<%= helmet[0].helmet_id %>_lightness">
-                    <%= helmet[0].photoresistor %>lx
+                <div class="info_value" id="user<%= helmet.helmet_id %>_lightness">
+                    <%= helmet.photoresistor %>lx
                 </div>
             </div>
             <div id="info_section" style="pointer-events: none;">
                 <div id="info_title">사용자 상태</div>
-                <div class="info_value" id="user<%= helmet[0].helmet_id %>_status">양호</div>
+                <div class="info_value" id="user<%= helmet.helmet_id %>_status">양호</div>
             </div>
         </div>
         <div id="lower_section">
@@ -79,20 +79,16 @@
         </div>
 
         <script>
-            const helmet_id = [];
+            const helmet_id = [<%=helmet.helmet_id %>]
 
-            <% helmet.forEach(element => { %>
-                helmet_id.push(<%= element.helmet_id %>);
-            <% });%>
-
-                function socketCallback(data) {
-                    console.log(data);
-                    insertDataOnChart(options_hum, parseFloat(data.humid).toFixed(1));
-                    insertDataOnChart(options_temp, parseFloat(data.temp).toFixed(1));
-                    insertDataOnChart(options_light, data.photoresistor);
-                    graph.update();
-                    setGeolocationByGPS(data.latitude, data.longitude);
-                }
+            function socketCallback(data) {
+                console.log(data);
+                insertDataOnChart(options_hum, parseFloat(data.humid).toFixed(1));
+                insertDataOnChart(options_temp, parseFloat(data.temp).toFixed(1));
+                insertDataOnChart(options_light, data.photoresistor);
+                graph.update();
+                setGeolocationByGPS(data.latitude, data.longitude);
+            }
 
 
             function userStatus(temp, shock, helmet_id, danger) {
