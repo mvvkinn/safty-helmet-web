@@ -1,10 +1,11 @@
 var socket = io();
 
 $(document).ready(() => {
-  socket.emit("join", helmet_id, () => {
-    console.log("reading on id", helmet_id);
+  helmet_id.forEach(id => {
+    socket.emit("join", id.toString(), () => {
+      console.log(`Socket room join at: ${id}`);
+    });
   });
-  console.log(helmet_id);
 });
 
 socket.on("helmetMsg", data => {
