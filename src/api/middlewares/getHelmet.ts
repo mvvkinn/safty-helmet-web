@@ -13,8 +13,6 @@ const getHelmet = async (req: Request, res: Response, next: NextFunction) => {
       include: "Worker",
     });
 
-    console.log(helmetRecord);
-
     res.render("userDashboard", {
       helmet: helmetRecord,
     });

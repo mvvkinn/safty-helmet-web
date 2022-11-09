@@ -11,8 +11,6 @@ const getField = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const record = await fieldModel.findAll();
 
-    logger.debug(`Requesting Field.. \n Records: ${record}`);
-
     res.render("index.ejs", { field: record });
   } catch (e) {
     logger.error("Error occured on index.ejs", e);
