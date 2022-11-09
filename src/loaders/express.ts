@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import api from "@api";
+import cors from "cors";
 
 export default (app: express.Application) => {
   app.get("/status", (req, res) => {
@@ -12,6 +13,7 @@ export default (app: express.Application) => {
 
   // hide framework info
   app.disable("x-powered-by");
+  app.use(cors());
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
