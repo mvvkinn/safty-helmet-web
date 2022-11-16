@@ -1,0 +1,32 @@
+//chage this file name to index.this
+//dotenv will be added
+
+export default {
+  port: 3000,
+
+  mqtt: {
+    host: "",
+    port: 1883,
+    username: "",
+    password: "",
+  },
+
+  /*
+  db: {
+    host: "localhost",
+    user: "helmet_admin",
+    password: "helmet1234!@#$",
+    database: "safty_helmet",
+    //rowsAsArray: true,
+  },*/
+  db: "mysql://helmet_admin:helmet1234@localhost/safty_helmet",
+
+  logs: {
+    level: process.env.LOG_LEVEL || "silly",
+  },
+
+  telegram: {
+    token: "put your own bot token",
+    chat_id: 123456789, //put your own chatid, IT'S HARD CODED, WILL BE CHANGED
+  },
+};

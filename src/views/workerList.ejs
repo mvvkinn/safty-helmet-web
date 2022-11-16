@@ -17,10 +17,10 @@
         </div>
         <div class="main_title_2">
             <p class="main_title_text_1">
-                <%= worker[0].field_name %>
+                <%= field.field_name %>
             </p>
             <p class="main_title_text_2" style="margin-bottom:60px;">
-                <%= worker[0].field_addr %>
+                <%= field.field_addr %>
             </p>
         </div>
         <div class="user_list_menu_section">
@@ -33,23 +33,23 @@
         </div>
         <div class="scroll">
             <% worker.forEach(_=> { %>
-                <div class="user_list_section" onclick="location.href='../userDashboard/<%= _.helmet_id %>'">
+                <div class="user_list_section" onclick="location.href='../userDashboard/<%= _.Helmet.helmet_id %>'">
                     <div class="user_list" style="width:100px;">
                         <%= _.worker_id %>
                     </div>
                     <div class="user_list" style="width:350px;">
                         <%= _.worker_name %>
                     </div>
-                    <div class="user_list" id="user<%= _.helmet_id %>_temp" style="width:350px;">
-                        <%= _.temp %>ºC
+                    <div class="user_list" id="user<%= _.Helmet.helmet_id %>_temp" style="width:350px;">
+                        <%= _.Helmet.temp %>ºC
                     </div>
-                    <div class="user_list" id="user<%= _.helmet_id %>_humid" style="width:350px;">
-                        <%= _.humid %> %
+                    <div class="user_list" id="user<%= _.Helmet.helmet_id %>_humid" style="width:350px;">
+                        <%= _.Helmet.humid %> %
                     </div>
-                    <div class="user_list" id="user<%= _.helmet_id %>_lightness" style="width:350px;">
-                        <%= _.photoresistor %>lx
+                    <div class="user_list" id="user<%= _.Helmet.helmet_id %>_lightness" style="width:350px;">
+                        <%= _.Helmet.photoresistor %>lx
                     </div>
-                    <div class="user_list" id="user<%= _.helmet_id %>_status" style="width:350px;">오프라인</div>
+                    <div class="user_list" id="user<%= _.Helmet.helmet_id %>_status" style="width:350px;">오프라인</div>
                 </div>
                 <% }); %>
         </div>
@@ -58,7 +58,7 @@
 
             //get ids from ejs
             <% worker.forEach(element => { %>
-                helmet_id.push(<%= element.helmet_id %>);
+                helmet_id.push(<%= element.Helmet.helmet_id %>);
             <% });%>
 
                 function socketCallback() { }

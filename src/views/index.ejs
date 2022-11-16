@@ -13,16 +13,15 @@
         <p class="main_title_text_2">SMART HARD HAT SYSTEM</p>
     </div>
     <div class="btn_section">
+
+
         <div class="btn_list">
-            <% field.forEach(_=> { %>
-                <div class="btn_normal" onclick="location.href='/workerList/<%= _.field_id %>'">
-                    <%= _.field_name %>
+            <% for (key in field) { %>
+                <div class="btn_normal" onclick="location.href='/workerList/<%= field[key].field_id %>'">
+                    <%= field[key].field_name;%>
                 </div>
-                <% }); %>
+                <% } %>
         </div>
-    </div>
 </body>
 
 </html>
-
-<!-- field.field.id, field.field_name, field.field_addr-->
