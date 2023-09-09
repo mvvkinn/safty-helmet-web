@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mvvkinn.xyz:3306/safty-helmet
+    username:
